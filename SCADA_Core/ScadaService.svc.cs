@@ -10,7 +10,7 @@ using System.Text;
 
 namespace SCADA_Core
 {
-    public class ScadaService : IRealTimeUnit
+    public class ScadaService : IRealTimeUnit, IAlarmDisplay
     {
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
 
@@ -61,6 +61,15 @@ namespace SCADA_Core
         }
 
         public void SendValue(string message, byte[] signature)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*********************************************************/
+        /*                    IAlarmDisplay                      */
+        /*********************************************************/
+
+        public void AlarmDisplayClientInit()
         {
             throw new NotImplementedException();
         }
