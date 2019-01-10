@@ -5,7 +5,12 @@ using System.Web;
 
 namespace SCADA_Core
 {
-    public class RealTimeDriver
+    public class RealTimeDriver : Driver
     {
+        public override float ReadValue(string tagName, string address)
+        {
+            // @TODO implement this !
+            throw new NotImplementedException();
+        }
     }
 }

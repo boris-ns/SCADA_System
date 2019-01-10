@@ -5,12 +5,18 @@ using System.Web;
 
 namespace SCADA_Core
 {
-    public class SimulationDriver
+    public class SimulationDriver : Driver
     {
         private const double amplitude = 100;
 
         public SimulationDriver()
         {
+        }
+
+        public override float ReadValue(string tagName, string address)
+        {
+            // @TODO implement this !
+            throw new NotImplementedException();
         }
 
         public static double Sine()
@@ -30,14 +36,12 @@ namespace SCADA_Core
 
         public static double Triangle()
         {
-            // @TODO: implement this
-            return 0;
+            return ((2 * amplitude) / Math.PI) * Math.Asin(Math.Sin(2 * Math.PI * DateTime.Now.Second / 60.0));
         }
 
         public static double Rectangle()
         {
-            // @TODO: implement this
-            return 0;
+            return amplitude * Math.Sign(Math.Sin((DateTime.Now.Second % 10) / 5.0));
         }
     }
 }
