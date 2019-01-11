@@ -19,7 +19,8 @@ namespace DatabaseManager
 
         private void btnAddTag_Click(object sender, EventArgs e)
         {
-
+            DataForm addTagForm = new DataForm();
+            addTagForm.Show();
         }
 
         private void btnRemoveTag_Click(object sender, EventArgs e)

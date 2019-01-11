@@ -18,6 +18,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trending", "Trending\Trending.csproj", "{55EBAEE3-1B9F-4DB8-A245-06FF95373C9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManager", "DatabaseManager\DatabaseManager.csproj", "{BE2C7401-9D6A-49E7-8313-A974A4D9813D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{460551BC-5268-4F35-A871-C2AFB19DC3D0} = {460551BC-5268-4F35-A871-C2AFB19DC3D0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
