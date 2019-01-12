@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace SCADA_Core
 {
+    [DataContract]
     public class InputTag : Tag
     {
-        private float scanTime;
-        private List<Alarm> alarms;
-        private bool enableScan;
-        private bool manualMode;
+        [DataMember] private float scanTime;
+        [DataMember] private List<Alarm> alarms;
+        [DataMember] private bool enableScan;
+        [DataMember] private bool manualMode;
 
         public InputTag()
         {
@@ -24,6 +26,11 @@ namespace SCADA_Core
             this.alarms = alarms;
             this.enableScan = enableScan;
             this.manualMode = manualMode;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

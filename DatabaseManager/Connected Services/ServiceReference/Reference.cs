@@ -22,6 +22,15 @@ namespace DatabaseManager.ServiceReference {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime alarmDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string alarmIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private DatabaseManager.ServiceReference.Tag tagField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -32,12 +41,372 @@ namespace DatabaseManager.ServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime alarmDateTime {
+            get {
+                return this.alarmDateTimeField;
+            }
+            set {
+                if ((this.alarmDateTimeField.Equals(value) != true)) {
+                    this.alarmDateTimeField = value;
+                    this.RaisePropertyChanged("alarmDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string alarmId {
+            get {
+                return this.alarmIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.alarmIdField, value) != true)) {
+                    this.alarmIdField = value;
+                    this.RaisePropertyChanged("alarmId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public DatabaseManager.ServiceReference.Tag tag {
+            get {
+                return this.tagField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tagField, value) != true)) {
+                    this.tagField = value;
+                    this.RaisePropertyChanged("tag");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Tag", Namespace="http://schemas.datacontract.org/2004/07/SCADA_Core")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.InputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalInput))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogInput))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.OutputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalOutput))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogOutput))]
+    public partial class Tag : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string descriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string driverField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ioAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tagNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.descriptionField, value) != true)) {
+                    this.descriptionField = value;
+                    this.RaisePropertyChanged("description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string driver {
+            get {
+                return this.driverField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.driverField, value) != true)) {
+                    this.driverField = value;
+                    this.RaisePropertyChanged("driver");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ioAddress {
+            get {
+                return this.ioAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ioAddressField, value) != true)) {
+                    this.ioAddressField = value;
+                    this.RaisePropertyChanged("ioAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string tagName {
+            get {
+                return this.tagNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tagNameField, value) != true)) {
+                    this.tagNameField = value;
+                    this.RaisePropertyChanged("tagName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InputTag", Namespace="http://schemas.datacontract.org/2004/07/SCADA_Core")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalInput))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogInput))]
+    public partial class InputTag : DatabaseManager.ServiceReference.Tag {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private DatabaseManager.ServiceReference.Alarm[] alarmsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool enableScanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool manualModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float scanTimeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public DatabaseManager.ServiceReference.Alarm[] alarms {
+            get {
+                return this.alarmsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.alarmsField, value) != true)) {
+                    this.alarmsField = value;
+                    this.RaisePropertyChanged("alarms");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool enableScan {
+            get {
+                return this.enableScanField;
+            }
+            set {
+                if ((this.enableScanField.Equals(value) != true)) {
+                    this.enableScanField = value;
+                    this.RaisePropertyChanged("enableScan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool manualMode {
+            get {
+                return this.manualModeField;
+            }
+            set {
+                if ((this.manualModeField.Equals(value) != true)) {
+                    this.manualModeField = value;
+                    this.RaisePropertyChanged("manualMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float scanTime {
+            get {
+                return this.scanTimeField;
+            }
+            set {
+                if ((this.scanTimeField.Equals(value) != true)) {
+                    this.scanTimeField = value;
+                    this.RaisePropertyChanged("scanTime");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DigitalInput", Namespace="http://schemas.datacontract.org/2004/07/SCADA_Core")]
+    [System.SerializableAttribute()]
+    public partial class DigitalInput : DatabaseManager.ServiceReference.InputTag {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AnalogInput", Namespace="http://schemas.datacontract.org/2004/07/SCADA_Core")]
+    [System.SerializableAttribute()]
+    public partial class AnalogInput : DatabaseManager.ServiceReference.InputTag {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float highLimitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float lowLimitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string unitsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float highLimit {
+            get {
+                return this.highLimitField;
+            }
+            set {
+                if ((this.highLimitField.Equals(value) != true)) {
+                    this.highLimitField = value;
+                    this.RaisePropertyChanged("highLimit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float lowLimit {
+            get {
+                return this.lowLimitField;
+            }
+            set {
+                if ((this.lowLimitField.Equals(value) != true)) {
+                    this.lowLimitField = value;
+                    this.RaisePropertyChanged("lowLimit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string units {
+            get {
+                return this.unitsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.unitsField, value) != true)) {
+                    this.unitsField = value;
+                    this.RaisePropertyChanged("units");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OutputTag", Namespace="http://schemas.datacontract.org/2004/07/SCADA_Core")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalOutput))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogOutput))]
+    public partial class OutputTag : DatabaseManager.ServiceReference.Tag {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float initValueField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float initValue {
+            get {
+                return this.initValueField;
+            }
+            set {
+                if ((this.initValueField.Equals(value) != true)) {
+                    this.initValueField = value;
+                    this.RaisePropertyChanged("initValue");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DigitalOutput", Namespace="http://schemas.datacontract.org/2004/07/SCADA_Core")]
+    [System.SerializableAttribute()]
+    public partial class DigitalOutput : DatabaseManager.ServiceReference.OutputTag {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AnalogOutput", Namespace="http://schemas.datacontract.org/2004/07/SCADA_Core")]
+    [System.SerializableAttribute()]
+    public partial class AnalogOutput : DatabaseManager.ServiceReference.OutputTag {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float highLimitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float lowLimitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string unitsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float highLimit {
+            get {
+                return this.highLimitField;
+            }
+            set {
+                if ((this.highLimitField.Equals(value) != true)) {
+                    this.highLimitField = value;
+                    this.RaisePropertyChanged("highLimit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float lowLimit {
+            get {
+                return this.lowLimitField;
+            }
+            set {
+                if ((this.lowLimitField.Equals(value) != true)) {
+                    this.lowLimitField = value;
+                    this.RaisePropertyChanged("lowLimit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string units {
+            get {
+                return this.unitsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.unitsField, value) != true)) {
+                    this.unitsField = value;
+                    this.RaisePropertyChanged("units");
+                }
             }
         }
     }
@@ -169,6 +538,95 @@ namespace DatabaseManager.ServiceReference {
         
         public System.Threading.Tasks.Task AlarmDisplayClientInitAsync() {
             return base.Channel.AlarmDisplayClientInitAsync();
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IDatabaseManager")]
+    public interface IDatabaseManager {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllDigitalInputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllDigitalInputsResponse")]
+        DatabaseManager.ServiceReference.DigitalInput[] GetAllDigitalInputs();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllDigitalInputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllDigitalInputsResponse")]
+        System.Threading.Tasks.Task<DatabaseManager.ServiceReference.DigitalInput[]> GetAllDigitalInputsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputsResponse")]
+        DatabaseManager.ServiceReference.DigitalOutput[] GetAllDigitalOutputs();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputsResponse")]
+        System.Threading.Tasks.Task<DatabaseManager.ServiceReference.DigitalOutput[]> GetAllDigitalOutputsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllAnalogInputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllAnalogInputsResponse")]
+        DatabaseManager.ServiceReference.AnalogInput[] GetAllAnalogInputs();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllAnalogInputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllAnalogInputsResponse")]
+        System.Threading.Tasks.Task<DatabaseManager.ServiceReference.AnalogInput[]> GetAllAnalogInputsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputsResponse")]
+        DatabaseManager.ServiceReference.AnalogOutput[] GetAllAnalogOutputs();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputsResponse")]
+        System.Threading.Tasks.Task<DatabaseManager.ServiceReference.AnalogOutput[]> GetAllAnalogOutputsAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IDatabaseManagerChannel : DatabaseManager.ServiceReference.IDatabaseManager, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DatabaseManagerClient : System.ServiceModel.ClientBase<DatabaseManager.ServiceReference.IDatabaseManager>, DatabaseManager.ServiceReference.IDatabaseManager {
+        
+        public DatabaseManagerClient() {
+        }
+        
+        public DatabaseManagerClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public DatabaseManagerClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DatabaseManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public DatabaseManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public DatabaseManager.ServiceReference.DigitalInput[] GetAllDigitalInputs() {
+            return base.Channel.GetAllDigitalInputs();
+        }
+        
+        public System.Threading.Tasks.Task<DatabaseManager.ServiceReference.DigitalInput[]> GetAllDigitalInputsAsync() {
+            return base.Channel.GetAllDigitalInputsAsync();
+        }
+        
+        public DatabaseManager.ServiceReference.DigitalOutput[] GetAllDigitalOutputs() {
+            return base.Channel.GetAllDigitalOutputs();
+        }
+        
+        public System.Threading.Tasks.Task<DatabaseManager.ServiceReference.DigitalOutput[]> GetAllDigitalOutputsAsync() {
+            return base.Channel.GetAllDigitalOutputsAsync();
+        }
+        
+        public DatabaseManager.ServiceReference.AnalogInput[] GetAllAnalogInputs() {
+            return base.Channel.GetAllAnalogInputs();
+        }
+        
+        public System.Threading.Tasks.Task<DatabaseManager.ServiceReference.AnalogInput[]> GetAllAnalogInputsAsync() {
+            return base.Channel.GetAllAnalogInputsAsync();
+        }
+        
+        public DatabaseManager.ServiceReference.AnalogOutput[] GetAllAnalogOutputs() {
+            return base.Channel.GetAllAnalogOutputs();
+        }
+        
+        public System.Threading.Tasks.Task<DatabaseManager.ServiceReference.AnalogOutput[]> GetAllAnalogOutputsAsync() {
+            return base.Channel.GetAllAnalogOutputsAsync();
         }
     }
 }

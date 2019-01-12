@@ -232,6 +232,30 @@
   <wsdl:message name="IAlarmDisplay_PrintAlarmsInfo_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PrintAlarmsInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllDigitalInputs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDigitalInputs" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllDigitalInputs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDigitalInputsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllDigitalOutputs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDigitalOutputs" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllDigitalOutputs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDigitalOutputsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllAnalogInputs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAnalogInputs" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllAnalogInputs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAnalogInputsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllAnalogOutputs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAnalogOutputs" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetAllAnalogOutputs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAnalogOutputsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRealTimeUnit">
     <wsdl:operation name="IsRTUNameAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailable" message="tns:IRealTimeUnit_IsRTUNameAvailable_InputMessage" />
@@ -254,6 +278,24 @@
     <wsdl:operation name="PrintAlarmsInfo">
       <wsdl:output wsaw:Action="http://tempuri.org/IAlarmDisplay/PrintAlarmsInfo" message="tns:IAlarmDisplay_PrintAlarmsInfo_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IAlarmDisplay/PrintAlarmsInfoResponse" message="tns:IAlarmDisplay_PrintAlarmsInfo_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IDatabaseManager">
+    <wsdl:operation name="GetAllDigitalInputs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalInputs" message="tns:IDatabaseManager_GetAllDigitalInputs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalInputsResponse" message="tns:IDatabaseManager_GetAllDigitalInputs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDigitalOutputs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputs" message="tns:IDatabaseManager_GetAllDigitalOutputs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputsResponse" message="tns:IDatabaseManager_GetAllDigitalOutputs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAnalogInputs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogInputs" message="tns:IDatabaseManager_GetAllAnalogInputs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogInputsResponse" message="tns:IDatabaseManager_GetAllAnalogInputs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAnalogOutputs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs" message="tns:IDatabaseManager_GetAllAnalogOutputs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputsResponse" message="tns:IDatabaseManager_GetAllAnalogOutputs_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRealTimeUnit" type="tns:IRealTimeUnit">
@@ -312,6 +354,45 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IDatabaseManager" type="tns:IDatabaseManager">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllDigitalInputs">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllDigitalInputs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDigitalOutputs">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAnalogInputs">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllAnalogInputs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAnalogOutputs">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ScadaService">
     <wsdl:port name="BasicHttpBinding_IRealTimeUnit" binding="tns:BasicHttpBinding_IRealTimeUnit">
       <soap:address location="http://localhost:50982/ScadaService.svc/RealTimeUnit" />
@@ -324,6 +405,9 @@
           <Upn>DESKTOP-A02CPCI\Boris</Upn>
         </Identity>
       </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IDatabaseManager" binding="tns:BasicHttpBinding_IDatabaseManager">
+      <soap:address location="http://localhost:50982/ScadaService.svc/DatabaseManager" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

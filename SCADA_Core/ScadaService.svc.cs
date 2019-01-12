@@ -10,9 +10,14 @@ using System.Text;
 
 namespace SCADA_Core
 {
-    public class ScadaService : IRealTimeUnit, IAlarmDisplay
+    public class ScadaService : IRealTimeUnit, IAlarmDisplay, IDatabaseManager
     {
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
+
+        private static List<DigitalInput> digitalInputTags = null;
+        private static List<DigitalOutput> digitalOutputTags = null;
+        private static List<AnalogInput> analogInputTags = null;
+        private static List<AnalogOutput> analogOutputTags = null;
 
         private static CspParameters csp = new CspParameters();
         private static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
@@ -72,6 +77,34 @@ namespace SCADA_Core
         public void AlarmDisplayClientInit()
         {
             throw new NotImplementedException();
+        }
+
+
+        /*********************************************************/
+        /*                    IDatabaseManager                   */
+        /*********************************************************/
+
+        public List<DigitalInput> GetAllDigitalInputs()
+        {
+            // @TODO @FIX This initialization move to another Init method, this is just for testing
+            digitalInputTags = new List<DigitalInput>();
+            digitalInputTags.Add(new DigitalInput("DI 1", "Description", "sim", "1", 1, new List<Alarm>(), false, false));
+            return digitalInputTags;
+        }
+        
+        public List<DigitalOutput> GetAllDigitalOutputs()
+        {
+            return digitalOutputTags;
+        }
+
+        public List<AnalogInput> GetAllAnalogInputs()
+        {
+            return analogInputTags;
+        }
+
+        public List<AnalogOutput> GetAllAnalogOutputs()
+        {
+            return analogOutputTags;
         }
     }
 }

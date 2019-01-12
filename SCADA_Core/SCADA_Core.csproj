@@ -72,6 +72,7 @@
     <Compile Include="DigitalOutput.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="IAlarmDisplay.cs" />
+    <Compile Include="IDatabaseManager.cs" />
     <Compile Include="InputTag.cs" />
     <Compile Include="IRealTimeUnit.cs" />
     <Compile Include="OutputTag.cs" />

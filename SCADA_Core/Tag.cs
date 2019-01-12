@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace SCADA_Core
 {
+    [DataContract]
     public class Tag
     {
-        private string tagName;
-        private string description;
-        private string driver;
-        private string ioAddress;
+        [DataMember] private string tagName;
+        [DataMember] private string description;
+        [DataMember] private string driver;
+        [DataMember] private string ioAddress;
 
         public Tag()
         {
@@ -22,6 +24,11 @@ namespace SCADA_Core
             this.description = description;
             this.driver = driver;
             this.ioAddress = ioAddress;
+        }
+
+        public override string ToString()
+        {
+            return $"{tagName} {driver} {ioAddress}";
         }
     }
 }
