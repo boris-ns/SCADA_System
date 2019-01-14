@@ -111,4 +111,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddDigitalInput">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="scanTime" type="xs:float" />
+        <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
+        <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddDigitalInputResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

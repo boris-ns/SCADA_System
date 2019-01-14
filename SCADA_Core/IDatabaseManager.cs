@@ -21,5 +21,9 @@ namespace SCADA_Core
 
         [OperationContract]
         List<AnalogOutput> GetAllAnalogOutputs();
+
+        [OperationContract]
+        void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
+                            float scanTime, bool enableScan, bool manualMode);
     }
 }

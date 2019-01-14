@@ -256,6 +256,12 @@
   <wsdl:message name="IDatabaseManager_GetAllAnalogOutputs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllAnalogOutputsResponse" />
   </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalInput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalInput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalInput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalInputResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRealTimeUnit">
     <wsdl:operation name="IsRTUNameAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailable" message="tns:IRealTimeUnit_IsRTUNameAvailable_InputMessage" />
@@ -296,6 +302,10 @@
     <wsdl:operation name="GetAllAnalogOutputs">
       <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs" message="tns:IDatabaseManager_GetAllAnalogOutputs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputsResponse" message="tns:IDatabaseManager_GetAllAnalogOutputs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalInput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalInput" message="tns:IDatabaseManager_AddDigitalInput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse" message="tns:IDatabaseManager_AddDigitalInput_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRealTimeUnit" type="tns:IRealTimeUnit">
@@ -385,6 +395,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllAnalogOutputs">
       <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalInput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddDigitalInput" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace SCADA_Core
 {
@@ -19,6 +20,12 @@ namespace SCADA_Core
             : base(tagName, description, driver, ioAddress)
         {
             this.initValue = initValue;
+        }
+
+        public float InitValue
+        {
+            get { return initValue; }
+            set { initValue = value; }
         }
     }
 }

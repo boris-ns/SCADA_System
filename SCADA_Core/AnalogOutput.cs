@@ -6,6 +6,7 @@ using System.Web;
 
 namespace SCADA_Core
 {
+    [Serializable]
     [DataContract]
     public class AnalogOutput : OutputTag
     {
@@ -24,6 +25,24 @@ namespace SCADA_Core
             this.lowLimit = lowLimit;
             this.highLimit = highLimit;
             this.units = units;
+        }
+
+        public float LowLimit
+        {
+            get { return lowLimit; }
+            set { lowLimit = value; }
+        }
+
+        public float HighLimit
+        {
+            get { return highLimit; }
+            set { highLimit = value; }
+        }
+
+        public string Units
+        {
+            get { return units; }
+            set { units = value; }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Web;
 
 namespace SCADA_Core
 {
+    [Serializable]
     [DataContract]
     public class Tag
     {
@@ -29,6 +30,30 @@ namespace SCADA_Core
         public override string ToString()
         {
             return $"{tagName} {driver} {ioAddress}";
+        }
+
+        public string TagName
+        {
+            get { return tagName; }
+            set { tagName = value; }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+        public string Driver
+        {
+            get { return driver; }
+            set { driver = value; }
+        }
+
+        public string IOAddress
+        {
+            get { return ioAddress; }
+            set { ioAddress = value; }
         }
     }
 }

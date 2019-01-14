@@ -6,20 +6,20 @@ using System.Web;
 
 namespace SCADA_Core
 {
+    [Serializable]
     [DataContract]
     public class Alarm
     {
         [DataMember] private string alarmId;
-        [DataMember] private Tag tag; // mozda ovo moze da koristi kao tip alarma
         [DataMember] private DateTime alarmDateTime;
 
         public Alarm()
         {
         }
 
-        public Alarm(Tag tag, DateTime alarmDateTime)
+        public Alarm(string alarmId, DateTime alarmDateTime)
         {
-            this.tag = tag;
+            this.alarmId = alarmId;
             this.alarmDateTime = alarmDateTime;
         }
     }

@@ -6,6 +6,7 @@ using System.Web;
 
 namespace SCADA_Core
 {
+    [Serializable]
     [DataContract]
     public class AnalogInput : InputTag
     {
@@ -18,13 +19,31 @@ namespace SCADA_Core
         }
 
         public AnalogInput(string tagName, string description, string driver, string ioAddress,
-                            float scanTime, List<Alarm> alarms, bool enableScan, bool manualMode,
+                            float scanTime, bool enableScan, bool manualMode,
                             float lowLimit, float highLimit, string units)
-            : base(tagName, description, driver, ioAddress, scanTime, alarms, enableScan, manualMode)
+            : base(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode)
         {
             this.lowLimit = lowLimit;
             this.highLimit = highLimit;
             this.units = units;
+        }
+
+        public float LowLimit
+        {
+            get { return lowLimit; }
+            set { lowLimit = value; }
+        }
+
+        public float HighLimit
+        {
+            get { return highLimit; }
+            set { highLimit = value; }
+        }
+
+        public string Units
+        {
+            get { return units; }
+            set { units = value; }
         }
     }
 }

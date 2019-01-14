@@ -75,6 +75,7 @@
     <Compile Include="IDatabaseManager.cs" />
     <Compile Include="InputTag.cs" />
     <Compile Include="IRealTimeUnit.cs" />
+    <Compile Include="ListOfTags.cs" />
     <Compile Include="OutputTag.cs" />
     <Compile Include="RealTimeDriver.cs" />
     <Compile Include="ScadaService.svc.cs">

@@ -34,7 +34,7 @@ namespace DatabaseManager
 
         private void btnAddTag_Click(object sender, EventArgs e)
         {
-            DataForm addTagForm = new DataForm();
+            DataForm addTagForm = new DataForm(dbManagerService);
             addTagForm.Show();
         }
 

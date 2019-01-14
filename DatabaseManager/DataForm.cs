@@ -12,9 +12,12 @@ namespace DatabaseManager
 {
     public partial class DataForm : Form
     {
-        public DataForm()
+        private ServiceReference.DatabaseManagerClient service;
+
+        public DataForm(ServiceReference.DatabaseManagerClient service)
         {
             InitializeComponent();
+            this.service = service;
         }
 
         private void btnAddAlarm_Click(object sender, EventArgs e)
@@ -29,7 +32,26 @@ namespace DatabaseManager
 
         private void buttonFinish_Click(object sender, EventArgs e)
         {
+            switch (comboBoxTagType.SelectedIndex)
+            {
+                case 0: // Digital Input
+                    service.AddDigitalInput(textBoxTagName.Text, richTextBoxDescription.Text, comboBoxDriver.Text,
+                                textBoxIOAddress.Text, float.Parse(textBoxScanTime.Text), checkBoxOnOffScan.Checked,
+                                checkBoxAutoManual.Checked);
+                    break;
 
+                case 1: // Digital Output
+                    break;
+
+                case 2: // Analog Input
+                    break;
+
+                case 3: // Analog Output
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void EnableComponentsForDigitalInput()

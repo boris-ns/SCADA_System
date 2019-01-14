@@ -7,17 +7,17 @@ using System.Security.Cryptography;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace SCADA_Core
 {
     public class ScadaService : IRealTimeUnit, IAlarmDisplay, IDatabaseManager
     {
+        private static string fileLocationTags = @"C:\scadaConfig.xml";
+
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
 
-        private static List<DigitalInput> digitalInputTags = null;
-        private static List<DigitalOutput> digitalOutputTags = null;
-        private static List<AnalogInput> analogInputTags = null;
-        private static List<AnalogOutput> analogOutputTags = null;
+        private static ListOfTags listOfTags = new ListOfTags();
 
         private static CspParameters csp = new CspParameters();
         private static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
@@ -43,6 +43,26 @@ namespace SCADA_Core
             deformatter.SetHashAlgorithm("SHA256");
 
             return deformatter.VerifySignature(hashVal, signature);
+        }
+
+        private void WriteTagsToFile()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ListOfTags));
+
+            using (FileStream fs = new FileStream(fileLocationTags, FileMode.Create))
+            {
+                xmlSerializer.Serialize(fs, listOfTags);
+            }
+        }
+
+        private void LoadTagsFromFile()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ListOfTags));
+
+            using (FileStream fs = new FileStream(fileLocationTags, FileMode.Open))
+            {
+                listOfTags = (ListOfTags)xmlSerializer.Deserialize(fs);
+            }
         }
 
         /*********************************************************/
@@ -86,25 +106,32 @@ namespace SCADA_Core
 
         public List<DigitalInput> GetAllDigitalInputs()
         {
-            // @TODO @FIX This initialization move to another Init method, this is just for testing
-            digitalInputTags = new List<DigitalInput>();
-            digitalInputTags.Add(new DigitalInput("DI 1", "Description", "sim", "1", 1, new List<Alarm>(), false, false));
-            return digitalInputTags;
+            GetAllDigitalOutputs();
+            return listOfTags.DigitalInputs;
         }
         
         public List<DigitalOutput> GetAllDigitalOutputs()
         {
-            return digitalOutputTags;
+            LoadTagsFromFile();
+            return listOfTags.DigitalOutputs;
         }
 
         public List<AnalogInput> GetAllAnalogInputs()
         {
-            return analogInputTags;
+            return listOfTags.AnalogInputs;
         }
 
         public List<AnalogOutput> GetAllAnalogOutputs()
         {
-            return analogOutputTags;
+            return listOfTags.AnalogOutputs;
+        }
+
+        public void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
+                            float scanTime, bool enableScan, bool manualMode)
+        {
+            DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
+            listOfTags.DigitalInputs.Add(newTag);
+            WriteTagsToFile();
         }
     }
 }

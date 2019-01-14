@@ -568,6 +568,12 @@ namespace DatabaseManager.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs", ReplyAction="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputsResponse")]
         System.Threading.Tasks.Task<DatabaseManager.ServiceReference.AnalogOutput[]> GetAllAnalogOutputsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
+        void AddDigitalInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
+        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -627,6 +633,14 @@ namespace DatabaseManager.ServiceReference {
         
         public System.Threading.Tasks.Task<DatabaseManager.ServiceReference.AnalogOutput[]> GetAllAnalogOutputsAsync() {
             return base.Channel.GetAllAnalogOutputsAsync();
+        }
+        
+        public void AddDigitalInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode) {
+            base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
+        }
+        
+        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode) {
+            return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
         }
     }
 }
