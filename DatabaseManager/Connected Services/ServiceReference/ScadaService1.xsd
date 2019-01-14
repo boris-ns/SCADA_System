@@ -63,51 +63,15 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllDigitalInputs">
+  <xs:element name="GetTags">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllDigitalInputsResponse">
+  <xs:element name="GetTagsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="GetAllDigitalInputsResult" nillable="true" type="q2:ArrayOfDigitalInput" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllDigitalOutputs">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllDigitalOutputsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="GetAllDigitalOutputsResult" nillable="true" type="q3:ArrayOfDigitalOutput" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllAnalogInputs">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllAnalogInputsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="GetAllAnalogInputsResult" nillable="true" type="q4:ArrayOfAnalogInput" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllAnalogOutputs">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAllAnalogOutputsResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="GetAllAnalogOutputsResult" nillable="true" type="q5:ArrayOfAnalogOutput" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="GetTagsResult" nillable="true" type="q2:ListOfTags" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -125,6 +89,62 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="AddDigitalInputResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddDigitalOutput">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="initValue" type="xs:float" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddDigitalOutputResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAnalogInput">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="scanTime" type="xs:float" />
+        <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
+        <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
+        <xs:element minOccurs="0" name="lowLimit" type="xs:float" />
+        <xs:element minOccurs="0" name="highLimit" type="xs:float" />
+        <xs:element minOccurs="0" name="units" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAnalogInputResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAnalogOutput">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="initValue" type="xs:float" />
+        <xs:element minOccurs="0" name="lowLimit" type="xs:float" />
+        <xs:element minOccurs="0" name="highLimit" type="xs:float" />
+        <xs:element minOccurs="0" name="units" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAnalogOutputResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

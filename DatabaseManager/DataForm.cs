@@ -32,21 +32,41 @@ namespace DatabaseManager
 
         private void buttonFinish_Click(object sender, EventArgs e)
         {
+            string tagName = textBoxTagName.Text;
+            string description = richTextBoxDescription.Text;
+            string driver = comboBoxDriver.Text;
+            string ioAddress = textBoxIOAddress.Text;
+            float initValue = 0;
+            float lowLimit  = 0;
+            float highLimit = 0;
+
             switch (comboBoxTagType.SelectedIndex)
             {
                 case 0: // Digital Input
-                    service.AddDigitalInput(textBoxTagName.Text, richTextBoxDescription.Text, comboBoxDriver.Text,
-                                textBoxIOAddress.Text, float.Parse(textBoxScanTime.Text), checkBoxOnOffScan.Checked,
-                                checkBoxAutoManual.Checked);
+                    service.AddDigitalInput(tagName, description, driver, ioAddress, float.Parse(textBoxScanTime.Text),
+                                            checkBoxOnOffScan.Checked,checkBoxAutoManual.Checked);
                     break;
 
                 case 1: // Digital Output
+                    service.AddDigitalOutput(tagName, description, driver, ioAddress, float.Parse(textBoxInitValue.Text));
                     break;
 
                 case 2: // Analog Input
+                    initValue = float.Parse(textBoxScanTime.Text);
+                    lowLimit = float.Parse(textBoxLowLimit.Text);
+                    highLimit = float.Parse(textBoxHighLimit.Text);
+
+                    service.AddAnalogInput(tagName, description, driver, ioAddress, initValue, checkBoxOnOffScan.Checked, 
+                                            checkBoxAutoManual.Checked, lowLimit, highLimit, textBoxUnits.Text);
                     break;
 
                 case 3: // Analog Output
+                    initValue = float.Parse(textBoxScanTime.Text);
+                    lowLimit = float.Parse(textBoxLowLimit.Text);
+                    highLimit = float.Parse(textBoxHighLimit.Text);
+
+                    service.AddAnalogOutput(tagName, description, driver, ioAddress, initValue, lowLimit,
+                                            highLimit, textBoxUnits.Text);
                     break;
 
                 default:

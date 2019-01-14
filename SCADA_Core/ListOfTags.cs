@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 using System.Xml.Serialization;
 
 namespace SCADA_Core
 {
-    [Serializable]
     [XmlRoot("Tags")]
+    [DataContract]
     public class ListOfTags
     {
-        private static List<DigitalInput> digitalInputTags = null;
-        private static List<DigitalOutput> digitalOutputTags = null;
-        private static List<AnalogInput> analogInputTags = null;
-        private static List<AnalogOutput> analogOutputTags = null;
+        [DataMember] private List<DigitalInput> digitalInputTags = null;
+        [DataMember] private List<DigitalOutput> digitalOutputTags = null;
+        [DataMember] private List<AnalogInput> analogInputTags = null;
+        [DataMember] private List<AnalogOutput> analogOutputTags = null;
 
         public ListOfTags()
         {
@@ -21,6 +23,18 @@ namespace SCADA_Core
             digitalOutputTags = new List<DigitalOutput>();
             analogInputTags = new List<AnalogInput>();
             analogOutputTags = new List<AnalogOutput>();
+
+            ScadaService.LoadTagsFromFile();
+        }
+
+        public void WriteTagsToFile()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ListOfTags));
+
+            using (FileStream fs = new FileStream(ScadaService.fileLocationTags, FileMode.Create))
+            {
+                xmlSerializer.Serialize(fs, this);
+            }
         }
 
         public List<DigitalInput> DigitalInputs

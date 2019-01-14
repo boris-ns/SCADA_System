@@ -11,19 +11,22 @@ namespace SCADA_Core
     public interface IDatabaseManager
     {
         [OperationContract]
-        List<DigitalInput> GetAllDigitalInputs();
-
-        [OperationContract]
-        List<DigitalOutput> GetAllDigitalOutputs();
-
-        [OperationContract]
-        List<AnalogInput> GetAllAnalogInputs();
-
-        [OperationContract]
-        List<AnalogOutput> GetAllAnalogOutputs();
+        ListOfTags GetTags();
 
         [OperationContract]
         void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
                             float scanTime, bool enableScan, bool manualMode);
+
+        [OperationContract]
+        void AddDigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue);
+
+        [OperationContract]
+        void AddAnalogInput(string tagName, string description, string driver, string ioAddress,
+                            float scanTime, bool enableScan, bool manualMode,
+                            float lowLimit, float highLimit, string units);
+
+        [OperationContract]
+        void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, float initValue,
+                            float lowLimit, float highLimit, string units);
     }
 }

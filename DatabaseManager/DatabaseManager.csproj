@@ -82,16 +82,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Connected Services\ServiceReference\DatabaseManager.ServiceReference.AnalogInput.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceReference\DatabaseManager.ServiceReference.AnalogOutput.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceReference\DatabaseManager.ServiceReference.DigitalInput.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\ServiceReference\DatabaseManager.ServiceReference.DigitalOutput.datasource">
+    <None Include="Connected Services\ServiceReference\DatabaseManager.ServiceReference.ListOfTags.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference\ScadaService.wsdl" />

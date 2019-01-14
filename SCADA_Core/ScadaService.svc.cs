@@ -13,7 +13,7 @@ namespace SCADA_Core
 {
     public class ScadaService : IRealTimeUnit, IAlarmDisplay, IDatabaseManager
     {
-        private static string fileLocationTags = @"C:\scadaConfig.xml";
+        public static string fileLocationTags = @"C:\scadaConfig.xml";
 
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
 
@@ -45,17 +45,8 @@ namespace SCADA_Core
             return deformatter.VerifySignature(hashVal, signature);
         }
 
-        private void WriteTagsToFile()
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ListOfTags));
-
-            using (FileStream fs = new FileStream(fileLocationTags, FileMode.Create))
-            {
-                xmlSerializer.Serialize(fs, listOfTags);
-            }
-        }
-
-        private void LoadTagsFromFile()
+        // @TODO @FIX Not the best idea for this to be 'public static'
+        public static void LoadTagsFromFile()
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ListOfTags));
 
@@ -104,26 +95,9 @@ namespace SCADA_Core
         /*                    IDatabaseManager                   */
         /*********************************************************/
 
-        public List<DigitalInput> GetAllDigitalInputs()
+        public ListOfTags GetTags()
         {
-            GetAllDigitalOutputs();
-            return listOfTags.DigitalInputs;
-        }
-        
-        public List<DigitalOutput> GetAllDigitalOutputs()
-        {
-            LoadTagsFromFile();
-            return listOfTags.DigitalOutputs;
-        }
-
-        public List<AnalogInput> GetAllAnalogInputs()
-        {
-            return listOfTags.AnalogInputs;
-        }
-
-        public List<AnalogOutput> GetAllAnalogOutputs()
-        {
-            return listOfTags.AnalogOutputs;
+            return listOfTags;
         }
 
         public void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
@@ -131,7 +105,33 @@ namespace SCADA_Core
         {
             DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
             listOfTags.DigitalInputs.Add(newTag);
-            WriteTagsToFile();
+            listOfTags.WriteTagsToFile();
+        }
+
+        public void AddDigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue)
+        {
+            DigitalOutput newTag = new DigitalOutput(tagName, description, driver, ioAddress, initValue);
+            listOfTags.DigitalOutputs.Add(newTag);
+            listOfTags.WriteTagsToFile();
+        }
+
+        public void AddAnalogInput(string tagName, string description, string driver, string ioAddress,
+                                    float scanTime, bool enableScan, bool manualMode,
+                                    float lowLimit, float highLimit, string units)
+        {
+            AnalogInput newTag = new AnalogInput(tagName, description, driver, ioAddress, scanTime, 
+                                                enableScan, manualMode, lowLimit, highLimit, units);
+            listOfTags.AnalogInputs.Add(newTag);
+            listOfTags.WriteTagsToFile();
+        }
+
+        public void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, 
+                                    float initValue, float lowLimit, float highLimit, string units)
+        {
+            AnalogOutput newTag = new AnalogOutput(tagName, description, driver, ioAddress,
+                                                    initValue, lowLimit, highLimit, units);
+            listOfTags.AnalogOutputs.Add(newTag);
+            listOfTags.WriteTagsToFile();
         }
     }
 }

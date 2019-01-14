@@ -13,6 +13,7 @@ namespace DatabaseManager
     public partial class MainForm : Form
     {
         public static ServiceReference.DatabaseManagerClient dbManagerService;
+        public static ServiceReference.ListOfTags listOfTags;
 
         public MainForm()
         {
@@ -24,12 +25,19 @@ namespace DatabaseManager
         /* Loads tags from service and imports them into list box */
         private void LoadTags()
         {
-            ServiceReference.DigitalInput[] tags = dbManagerService.GetAllDigitalInputs();
+            listOfTags = dbManagerService.GetTags();
 
-            foreach (var tag in tags)
-            {
+            foreach (var tag in listOfTags.digitalInputTags)
                 listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
-            }
+
+            foreach (var tag in listOfTags.digitalOutputTags)
+                listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
+
+            foreach (var tag in listOfTags.analogInputTags)
+                listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
+
+            foreach (var tag in listOfTags.analogOutputTags)
+                listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
         }
 
         private void btnAddTag_Click(object sender, EventArgs e)

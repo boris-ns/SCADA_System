@@ -232,35 +232,35 @@
   <wsdl:message name="IAlarmDisplay_PrintAlarmsInfo_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PrintAlarmsInfoResponse" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllDigitalInputs_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllDigitalInputs" />
+  <wsdl:message name="IDatabaseManager_GetTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTags" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllDigitalInputs_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllDigitalInputsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllDigitalOutputs_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllDigitalOutputs" />
-  </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllDigitalOutputs_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllDigitalOutputsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllAnalogInputs_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllAnalogInputs" />
-  </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllAnalogInputs_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllAnalogInputsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllAnalogOutputs_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllAnalogOutputs" />
-  </wsdl:message>
-  <wsdl:message name="IDatabaseManager_GetAllAnalogOutputs_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllAnalogOutputsResponse" />
+  <wsdl:message name="IDatabaseManager_GetTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsResponse" />
   </wsdl:message>
   <wsdl:message name="IDatabaseManager_AddDigitalInput_InputMessage">
     <wsdl:part name="parameters" element="tns:AddDigitalInput" />
   </wsdl:message>
   <wsdl:message name="IDatabaseManager_AddDigitalInput_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddDigitalInputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalOutput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalOutput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalOutput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalOutputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogInput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogInput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogInput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogInputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogOutput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogOutput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogOutput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogOutputResponse" />
   </wsdl:message>
   <wsdl:portType name="IRealTimeUnit">
     <wsdl:operation name="IsRTUNameAvailable">
@@ -287,25 +287,25 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IDatabaseManager">
-    <wsdl:operation name="GetAllDigitalInputs">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalInputs" message="tns:IDatabaseManager_GetAllDigitalInputs_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalInputsResponse" message="tns:IDatabaseManager_GetAllDigitalInputs_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllDigitalOutputs">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputs" message="tns:IDatabaseManager_GetAllDigitalOutputs_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputsResponse" message="tns:IDatabaseManager_GetAllDigitalOutputs_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllAnalogInputs">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogInputs" message="tns:IDatabaseManager_GetAllAnalogInputs_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogInputsResponse" message="tns:IDatabaseManager_GetAllAnalogInputs_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllAnalogOutputs">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs" message="tns:IDatabaseManager_GetAllAnalogOutputs_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputsResponse" message="tns:IDatabaseManager_GetAllAnalogOutputs_OutputMessage" />
+    <wsdl:operation name="GetTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetTags" message="tns:IDatabaseManager_GetTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetTagsResponse" message="tns:IDatabaseManager_GetTags_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddDigitalInput">
       <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalInput" message="tns:IDatabaseManager_AddDigitalInput_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse" message="tns:IDatabaseManager_AddDigitalInput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalOutput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalOutput" message="tns:IDatabaseManager_AddDigitalOutput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalOutputResponse" message="tns:IDatabaseManager_AddDigitalOutput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogInput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogInput" message="tns:IDatabaseManager_AddAnalogInput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse" message="tns:IDatabaseManager_AddAnalogInput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogOutput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogOutput" message="tns:IDatabaseManager_AddAnalogOutput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogOutputResponse" message="tns:IDatabaseManager_AddAnalogOutput_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRealTimeUnit" type="tns:IRealTimeUnit">
@@ -366,35 +366,8 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_IDatabaseManager" type="tns:IDatabaseManager">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetAllDigitalInputs">
-      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllDigitalInputs" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllDigitalOutputs">
-      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllDigitalOutputs" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllAnalogInputs">
-      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllAnalogInputs" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllAnalogOutputs">
-      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetAllAnalogOutputs" style="document" />
+    <wsdl:operation name="GetTags">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetTags" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -404,6 +377,33 @@
     </wsdl:operation>
     <wsdl:operation name="AddDigitalInput">
       <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddDigitalInput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalOutput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddDigitalOutput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogInput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddAnalogInput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogOutput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddAnalogOutput" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

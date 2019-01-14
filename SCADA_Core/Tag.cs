@@ -6,7 +6,6 @@ using System.Web;
 
 namespace SCADA_Core
 {
-    [Serializable]
     [DataContract]
     public class Tag
     {
