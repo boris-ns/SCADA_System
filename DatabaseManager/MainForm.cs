@@ -40,6 +40,12 @@ namespace DatabaseManager
                 listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
         }
 
+        private void UpdateTagsList()
+        {
+            listBoxTags.Items.Clear();
+            LoadTags();
+        }
+
         private void btnAddTag_Click(object sender, EventArgs e)
         {
             DataForm addTagForm = new DataForm(dbManagerService);
@@ -54,6 +60,11 @@ namespace DatabaseManager
         private void btnEditTag_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            UpdateTagsList();
         }
     }
 }

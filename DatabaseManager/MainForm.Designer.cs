@@ -35,6 +35,7 @@ namespace DatabaseManager
             this.btnEditTag = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxTags = new System.Windows.Forms.ListBox();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddTag
@@ -81,14 +82,25 @@ namespace DatabaseManager
             this.listBoxTags.FormattingEnabled = true;
             this.listBoxTags.Location = new System.Drawing.Point(15, 86);
             this.listBoxTags.Name = "listBoxTags";
-            this.listBoxTags.Size = new System.Drawing.Size(264, 264);
+            this.listBoxTags.Size = new System.Drawing.Size(264, 238);
             this.listBoxTags.TabIndex = 4;
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.Location = new System.Drawing.Point(15, 330);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(75, 23);
+            this.buttonRefresh.TabIndex = 5;
+            this.buttonRefresh.Text = "Refresh";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 359);
+            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.listBoxTags);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEditTag);
@@ -108,7 +120,7 @@ namespace DatabaseManager
         private System.Windows.Forms.Button btnEditTag;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBoxTags;
-
+        private System.Windows.Forms.Button buttonRefresh;
     }
 }
 

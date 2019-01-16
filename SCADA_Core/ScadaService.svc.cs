@@ -48,6 +48,9 @@ namespace SCADA_Core
         // @TODO @FIX Not the best idea for this to be 'public static'
         public static void LoadTagsFromFile()
         {
+            if (!File.Exists(fileLocationTags))
+                return;
+
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ListOfTags));
 
             using (FileStream fs = new FileStream(fileLocationTags, FileMode.Open))

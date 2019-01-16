@@ -61,7 +61,7 @@ namespace DatabaseManager
                     break;
 
                 case 3: // Analog Output
-                    initValue = float.Parse(textBoxScanTime.Text);
+                    initValue = float.Parse(textBoxInitValue.Text);
                     lowLimit = float.Parse(textBoxLowLimit.Text);
                     highLimit = float.Parse(textBoxHighLimit.Text);
 
@@ -72,6 +72,8 @@ namespace DatabaseManager
                 default:
                     break;
             }
+
+            Close();
         }
 
         private void EnableComponentsForDigitalInput()

@@ -37,6 +37,7 @@ namespace SCADA_Core
             }
         }
 
+        [XmlArray("DigitalInputs"), XmlArrayItem(typeof(DigitalInput), ElementName = "DigitalInput")]
         public List<DigitalInput> DigitalInputs
         {
             get { return digitalInputTags; }
@@ -50,12 +51,14 @@ namespace SCADA_Core
             set { digitalOutputTags = value; }
         }
 
+        [XmlArray("AnalogInputs"), XmlArrayItem(typeof(AnalogInput), ElementName = "AnalogInput")]
         public List<AnalogInput> AnalogInputs
         {
             get { return analogInputTags; }
             set { analogInputTags = value; }
         }
 
+        [XmlArray("AnalogOutputs"), XmlArrayItem(typeof(AnalogOutput), ElementName = "AnalogOutput")]
         public List<AnalogOutput> AnalogOutputs
         {
             get { return analogOutputTags; }
