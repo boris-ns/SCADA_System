@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace SCADA_Core
 {
+    [Serializable]
     [DataContract]
     public class OutputTag : Tag
     {

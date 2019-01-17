@@ -24,7 +24,7 @@ namespace SCADA_Core
             analogInputTags = new List<AnalogInput>();
             analogOutputTags = new List<AnalogOutput>();
 
-            ScadaService.LoadTagsFromFile();
+            //ScadaService.LoadTagsFromFile();
         }
 
         public void WriteTagsToFile()

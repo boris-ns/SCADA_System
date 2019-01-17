@@ -44,7 +44,6 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Tag">
         <xs:sequence>
-          <xs:element minOccurs="0" name="alarms" nillable="true" type="tns:ArrayOfAlarm" />
           <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
           <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="scanTime" type="xs:float" />

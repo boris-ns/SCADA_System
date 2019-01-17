@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
 namespace SCADA_Core
 {
+    [Serializable]
     [DataContract]
     public class Tag
     {
@@ -26,11 +28,22 @@ namespace SCADA_Core
             this.ioAddress = ioAddress;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (obj == this) return false;
+
+            Tag tag = (Tag)obj;
+
+            return tagName == tag.tagName;
+        }
+
         public override string ToString()
         {
             return $"{tagName} {driver} {ioAddress}";
         }
 
+        [Key]
         public string TagName
         {
             get { return tagName; }

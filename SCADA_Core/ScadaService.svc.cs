@@ -17,7 +17,7 @@ namespace SCADA_Core
 
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
 
-        private static ListOfTags listOfTags = new ListOfTags();
+        private static ListOfTags listOfTags;// = new ListOfTags();
 
         private static CspParameters csp = new CspParameters();
         private static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
@@ -46,6 +46,7 @@ namespace SCADA_Core
         }
 
         // @TODO @FIX Not the best idea for this to be 'public static'
+        // Sometimes this function will break because it can't access requested file.
         public static void LoadTagsFromFile()
         {
             if (!File.Exists(fileLocationTags))
@@ -100,7 +101,15 @@ namespace SCADA_Core
 
         public ListOfTags GetTags()
         {
-            return listOfTags;
+            ListOfTags list = new ListOfTags();
+
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                list.DigitalInputs = (from tag in db.Tags.OfType<DigitalInput>() select tag).ToList();
+                list.DigitalOutputs = (from tag in db.Tags.OfType<DigitalOutput>() select tag).ToList();
+            }
+
+            return list;
         }
 
         public void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
@@ -134,6 +143,20 @@ namespace SCADA_Core
             AnalogOutput newTag = new AnalogOutput(tagName, description, driver, ioAddress,
                                                     initValue, lowLimit, highLimit, units);
             listOfTags.AnalogOutputs.Add(newTag);
+            listOfTags.WriteTagsToFile();
+        }
+
+        public void RemoveTag(object tag)
+        {
+            if (tag is DigitalInput)
+                listOfTags.DigitalInputs.Remove((DigitalInput)tag);
+            else if (tag is DigitalOutput)
+                listOfTags.DigitalOutputs.Remove((DigitalOutput)tag);
+            else if (tag is AnalogInput)
+                listOfTags.AnalogInputs.Remove((AnalogInput)tag);
+            else
+                listOfTags.AnalogOutputs.Remove((AnalogOutput)tag);
+
             listOfTags.WriteTagsToFile();
         }
     }

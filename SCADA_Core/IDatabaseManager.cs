@@ -28,5 +28,8 @@ namespace SCADA_Core
         [OperationContract]
         void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, float initValue,
                             float lowLimit, float highLimit, string units);
+
+        [OperationContract]
+        void RemoveTag(object tag);
     }
 }

@@ -13,7 +13,6 @@ namespace DatabaseManager
     public partial class MainForm : Form
     {
         public static ServiceReference.DatabaseManagerClient dbManagerService;
-        public static ServiceReference.ListOfTags listOfTags;
 
         public MainForm()
         {
@@ -25,18 +24,18 @@ namespace DatabaseManager
         /* Loads tags from service and imports them into list box */
         private void LoadTags()
         {
-            listOfTags = dbManagerService.GetTags();
+            ServiceReference.ListOfTags tags = dbManagerService.GetTags();
 
-            foreach (var tag in listOfTags.digitalInputTags)
+            foreach (var tag in tags.digitalInputTags)
                 listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
 
-            foreach (var tag in listOfTags.digitalOutputTags)
+            foreach (var tag in tags.digitalOutputTags)
                 listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
 
-            foreach (var tag in listOfTags.analogInputTags)
+            foreach (var tag in tags.analogInputTags)
                 listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
 
-            foreach (var tag in listOfTags.analogOutputTags)
+            foreach (var tag in tags.analogOutputTags)
                 listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
         }
 
@@ -54,7 +53,8 @@ namespace DatabaseManager
 
         private void btnRemoveTag_Click(object sender, EventArgs e)
         {
-
+            object selectedTag = listBoxTags.SelectedItem;
+            dbManagerService.RemoveTag(selectedTag);
         }
 
         private void btnEditTag_Click(object sender, EventArgs e)
@@ -65,6 +65,11 @@ namespace DatabaseManager
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             UpdateTagsList();
+        }
+
+        private void listBoxTags_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnRemoveTag.Enabled = true;
         }
     }
 }

@@ -50,6 +50,7 @@ namespace DatabaseManager
             // 
             // btnRemoveTag
             // 
+            this.btnRemoveTag.Enabled = false;
             this.btnRemoveTag.Location = new System.Drawing.Point(108, 23);
             this.btnRemoveTag.Name = "btnRemoveTag";
             this.btnRemoveTag.Size = new System.Drawing.Size(75, 23);
@@ -60,6 +61,7 @@ namespace DatabaseManager
             // 
             // btnEditTag
             // 
+            this.btnEditTag.Enabled = false;
             this.btnEditTag.Location = new System.Drawing.Point(204, 23);
             this.btnEditTag.Name = "btnEditTag";
             this.btnEditTag.Size = new System.Drawing.Size(75, 23);
@@ -84,6 +86,7 @@ namespace DatabaseManager
             this.listBoxTags.Name = "listBoxTags";
             this.listBoxTags.Size = new System.Drawing.Size(264, 238);
             this.listBoxTags.TabIndex = 4;
+            this.listBoxTags.SelectedIndexChanged += new System.EventHandler(this.listBoxTags_SelectedIndexChanged);
             // 
             // buttonRefresh
             // 

@@ -424,9 +424,6 @@ namespace DatabaseManager.ServiceReference {
     public partial class InputTag : DatabaseManager.ServiceReference.Tag {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private DatabaseManager.ServiceReference.Alarm[] alarmsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool enableScanField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -434,19 +431,6 @@ namespace DatabaseManager.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private float scanTimeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public DatabaseManager.ServiceReference.Alarm[] alarms {
-            get {
-                return this.alarmsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.alarmsField, value) != true)) {
-                    this.alarmsField = value;
-                    this.RaisePropertyChanged("alarms");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool enableScan {
@@ -651,6 +635,26 @@ namespace DatabaseManager.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogOutputResponse")]
         System.Threading.Tasks.Task AddAnalogOutputAsync(string tagName, string description, string driver, string ioAddress, float initValue, float lowLimit, float highLimit, string units);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveTag", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveTagResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.Alarm[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.Alarm))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.ListOfTags))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogInput[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogInput))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.InputTag))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.Tag))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogOutput[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogOutput))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.OutputTag))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalInput[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalInput))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalOutput[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalOutput))]
+        void RemoveTag(object tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveTag", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveTagResponse")]
+        System.Threading.Tasks.Task RemoveTagAsync(object tag);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -718,6 +722,14 @@ namespace DatabaseManager.ServiceReference {
         
         public System.Threading.Tasks.Task AddAnalogOutputAsync(string tagName, string description, string driver, string ioAddress, float initValue, float lowLimit, float highLimit, string units) {
             return base.Channel.AddAnalogOutputAsync(tagName, description, driver, ioAddress, initValue, lowLimit, highLimit, units);
+        }
+        
+        public void RemoveTag(object tag) {
+            base.Channel.RemoveTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task RemoveTagAsync(object tag) {
+            return base.Channel.RemoveTagAsync(tag);
         }
     }
 }
