@@ -17,6 +17,6 @@ namespace SCADA_Core
         void InitRealTimeUnit(string rtuName, string publicKeyPath);
 
         [OperationContract]
-        void SendValue(string message, byte[] signature);
+        bool SendValue(string rtuName, string message, byte[] signature);
     }
 }

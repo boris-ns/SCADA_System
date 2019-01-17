@@ -44,7 +44,7 @@ namespace RealTimeUnit
             return formatter.CreateSignature(hashVal);
         }
 
-        private static void GenerateValues()
+        private static void GenerateValues(string rtuName)
         {
             Random random = new Random();
 
@@ -54,7 +54,12 @@ namespace RealTimeUnit
                 string message = value.ToString();
                 byte[] digitalSignature = SignMessage(message);
 
-                rtuService.SendValue(message, digitalSignature);
+                bool success = rtuService.SendValue(rtuName, message, digitalSignature);
+
+                if (success)
+                    Console.WriteLine("RTU: " + rtuName + " sent value of " + message + " to the service.");
+                else
+                    Console.WriteLine("RTU: " + rtuName + " failed to send a value to the service.");
 
                 Thread.Sleep(1000);
             }
@@ -70,7 +75,7 @@ namespace RealTimeUnit
 
             do
             {
-                Console.WriteLine("Input RTU name (id): ");
+                Console.Write("Input RTU name (id): ");
                 rtuName = Console.ReadLine();
             } while (!rtuService.IsRTUNameAvailable(rtuName));
 
@@ -78,7 +83,7 @@ namespace RealTimeUnit
 
             ExportPublicKey(pathToKey);
             rtuService.InitRealTimeUnit(rtuName, pathToKey);
-            GenerateValues();
+            GenerateValues(rtuName);
         }
     }
 }

@@ -17,10 +17,11 @@ namespace SCADA_Core
 
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
 
-        private static ListOfTags listOfTags;// = new ListOfTags();
-
         private static CspParameters csp = new CspParameters();
         private static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
+
+        private static Dictionary<string, float> realTimeDriverValues = new Dictionary<string, float>();
+
 
         private static void LoadPublicKey(string path)
         {
@@ -56,7 +57,7 @@ namespace SCADA_Core
 
             using (FileStream fs = new FileStream(fileLocationTags, FileMode.Open))
             {
-                listOfTags = (ListOfTags)xmlSerializer.Deserialize(fs);
+                //listOfTags = (ListOfTags)xmlSerializer.Deserialize(fs);
             }
         }
 
@@ -78,11 +79,31 @@ namespace SCADA_Core
             {
                 publicKeysForRTUs[rtuName] = publicKeyPath;
             }
+
+            lock (realTimeDriverValues)
+            {
+                realTimeDriverValues[rtuName] = 0.0f;
+            }
         }
 
-        public void SendValue(string message, byte[] signature)
+        public bool SendValue(string rtuName, string message, byte[] signature)
         {
-            throw new NotImplementedException();
+            if (!publicKeysForRTUs.ContainsKey(rtuName))
+                return false;
+
+            LoadPublicKey(publicKeysForRTUs[rtuName]);
+
+            if (!VerifyMessage(message, signature))
+                return false;
+
+            float generatedValue = 0.0f;
+            if (float.TryParse(message, out generatedValue))
+            {
+                realTimeDriverValues[rtuName] = generatedValue;
+                return true;
+            }
+
+            return false;
         }
 
         /*********************************************************/

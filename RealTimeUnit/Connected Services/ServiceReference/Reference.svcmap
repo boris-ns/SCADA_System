@@ -22,9 +22,10 @@
     <MetadataSource Address="http://localhost:50982/ScadaService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="ScadaService1.xsd" MetadataType="Schema" ID="ce32ec0d-f08f-4480-b89b-92ef30c7ec6b" SourceId="1" SourceUrl="http://localhost:50982/ScadaService.svc?xsd=xsd1" />
     <MetadataFile FileName="ScadaService.xsd" MetadataType="Schema" ID="bf57981d-0a74-4724-96db-67ec74f110b7" SourceId="1" SourceUrl="http://localhost:50982/ScadaService.svc?xsd=xsd0" />
     <MetadataFile FileName="ScadaService.wsdl" MetadataType="Wsdl" ID="299eb13e-82e1-49cb-b91c-718f61bd2217" SourceId="1" SourceUrl="http://localhost:50982/ScadaService.svc?wsdl" />
-    <MetadataFile FileName="ScadaService1.xsd" MetadataType="Schema" ID="ce32ec0d-f08f-4480-b89b-92ef30c7ec6b" SourceId="1" SourceUrl="http://localhost:50982/ScadaService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ScadaService2.xsd" MetadataType="Schema" ID="41d3c465-d88a-44f4-b80d-ff4415d0b157" SourceId="1" SourceUrl="http://localhost:50982/ScadaService.svc?xsd=xsd2" />
     <MetadataFile FileName="ScadaService.disco" MetadataType="Disco" ID="1d7d0086-fb16-4049-8cbf-9c36c90c2f24" SourceId="1" SourceUrl="http://localhost:50982/ScadaService.svc?disco" />
   </Metadata>
   <Extensions>
