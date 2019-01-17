@@ -30,6 +30,6 @@ namespace SCADA_Core
                             float lowLimit, float highLimit, string units);
 
         [OperationContract]
-        void RemoveTag(object tag);
+        void RemoveTag(string tagName);
     }
 }

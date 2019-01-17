@@ -153,18 +153,14 @@ namespace SCADA_Core
             AddTagToDatabase(newTag);
         }
 
-        public void RemoveTag(object tag)
+        public void RemoveTag(string tagName)
         {
-            if (tag is DigitalInput)
-                listOfTags.DigitalInputs.Remove((DigitalInput)tag);
-            else if (tag is DigitalOutput)
-                listOfTags.DigitalOutputs.Remove((DigitalOutput)tag);
-            else if (tag is AnalogInput)
-                listOfTags.AnalogInputs.Remove((AnalogInput)tag);
-            else
-                listOfTags.AnalogOutputs.Remove((AnalogOutput)tag);
-
-            listOfTags.WriteTagsToFile();
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                Tag tagToRemove = (from tag in db.Tags where tag.TagName == tagName select tag).Single();
+                db.Tags.Remove(tagToRemove);
+                db.SaveChanges();
+            }
         }
     }
 }

@@ -27,16 +27,16 @@ namespace DatabaseManager
             ServiceReference.ListOfTags tags = dbManagerService.GetTags();
 
             foreach (var tag in tags.digitalInputTags)
-                listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
+                listBoxTags.Items.Add(tag.tagName);
 
             foreach (var tag in tags.digitalOutputTags)
-                listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
+                listBoxTags.Items.Add(tag.tagName);
 
             foreach (var tag in tags.analogInputTags)
-                listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
+                listBoxTags.Items.Add(tag.tagName);
 
             foreach (var tag in tags.analogOutputTags)
-                listBoxTags.Items.Add(tag.tagName + " " + tag.ioAddress);
+                listBoxTags.Items.Add(tag.tagName);
         }
 
         private void UpdateTagsList()
@@ -53,8 +53,10 @@ namespace DatabaseManager
 
         private void btnRemoveTag_Click(object sender, EventArgs e)
         {
-            object selectedTag = listBoxTags.SelectedItem;
+            string selectedTag = (string)listBoxTags.SelectedItem;
             dbManagerService.RemoveTag(selectedTag);
+            UpdateTagsList();
+            btnRemoveTag.Enabled = false;
         }
 
         private void btnEditTag_Click(object sender, EventArgs e)

@@ -637,24 +637,10 @@ namespace DatabaseManager.ServiceReference {
         System.Threading.Tasks.Task AddAnalogOutputAsync(string tagName, string description, string driver, string ioAddress, float initValue, float lowLimit, float highLimit, string units);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveTag", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveTagResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.Alarm[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.Alarm))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.ListOfTags))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogInput[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogInput))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.InputTag))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.Tag))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogOutput[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.AnalogOutput))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.OutputTag))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalInput[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalInput))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalOutput[]))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DatabaseManager.ServiceReference.DigitalOutput))]
-        void RemoveTag(object tag);
+        void RemoveTag(string tagName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveTag", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveTagResponse")]
-        System.Threading.Tasks.Task RemoveTagAsync(object tag);
+        System.Threading.Tasks.Task RemoveTagAsync(string tagName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -724,12 +710,12 @@ namespace DatabaseManager.ServiceReference {
             return base.Channel.AddAnalogOutputAsync(tagName, description, driver, ioAddress, initValue, lowLimit, highLimit, units);
         }
         
-        public void RemoveTag(object tag) {
-            base.Channel.RemoveTag(tag);
+        public void RemoveTag(string tagName) {
+            base.Channel.RemoveTag(tagName);
         }
         
-        public System.Threading.Tasks.Task RemoveTagAsync(object tag) {
-            return base.Channel.RemoveTagAsync(tag);
+        public System.Threading.Tasks.Task RemoveTagAsync(string tagName) {
+            return base.Channel.RemoveTagAsync(tagName);
         }
     }
 }
