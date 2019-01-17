@@ -99,6 +99,15 @@ namespace SCADA_Core
         /*                    IDatabaseManager                   */
         /*********************************************************/
 
+        private void AddTagToDatabase(Tag tag)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Tags.Add(tag);
+                db.SaveChanges();
+            }
+        }
+
         public ListOfTags GetTags()
         {
             ListOfTags list = new ListOfTags();
@@ -107,6 +116,8 @@ namespace SCADA_Core
             {
                 list.DigitalInputs = (from tag in db.Tags.OfType<DigitalInput>() select tag).ToList();
                 list.DigitalOutputs = (from tag in db.Tags.OfType<DigitalOutput>() select tag).ToList();
+                list.AnalogInputs = (from tag in db.Tags.OfType<AnalogInput>() select tag).ToList();
+                list.AnalogOutputs = (from tag in db.Tags.OfType<AnalogOutput>() select tag).ToList();
             }
 
             return list;
@@ -116,15 +127,13 @@ namespace SCADA_Core
                             float scanTime, bool enableScan, bool manualMode)
         {
             DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
-            listOfTags.DigitalInputs.Add(newTag);
-            listOfTags.WriteTagsToFile();
+            AddTagToDatabase(newTag);
         }
 
         public void AddDigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue)
         {
             DigitalOutput newTag = new DigitalOutput(tagName, description, driver, ioAddress, initValue);
-            listOfTags.DigitalOutputs.Add(newTag);
-            listOfTags.WriteTagsToFile();
+            AddTagToDatabase(newTag);
         }
 
         public void AddAnalogInput(string tagName, string description, string driver, string ioAddress,
@@ -133,8 +142,7 @@ namespace SCADA_Core
         {
             AnalogInput newTag = new AnalogInput(tagName, description, driver, ioAddress, scanTime, 
                                                 enableScan, manualMode, lowLimit, highLimit, units);
-            listOfTags.AnalogInputs.Add(newTag);
-            listOfTags.WriteTagsToFile();
+            AddTagToDatabase(newTag);
         }
 
         public void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, 
@@ -142,8 +150,7 @@ namespace SCADA_Core
         {
             AnalogOutput newTag = new AnalogOutput(tagName, description, driver, ioAddress,
                                                     initValue, lowLimit, highLimit, units);
-            listOfTags.AnalogOutputs.Add(newTag);
-            listOfTags.WriteTagsToFile();
+            AddTagToDatabase(newTag);
         }
 
         public void RemoveTag(object tag)
