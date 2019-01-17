@@ -44,6 +44,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DisconnectRTU">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="rtuName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisconnectRTUResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AlarmDisplayClientInit">
     <xs:complexType>
       <xs:sequence />

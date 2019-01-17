@@ -57,6 +57,8 @@
             this.buttonFinish = new System.Windows.Forms.Button();
             this.labelTagName = new System.Windows.Forms.Label();
             this.textBoxTagName = new System.Windows.Forms.TextBox();
+            this.comboBoxAlarmType = new System.Windows.Forms.ComboBox();
+            this.labelAlarmType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelTagType
@@ -263,14 +265,14 @@
             // listBoxAlarms
             // 
             this.listBoxAlarms.FormattingEnabled = true;
-            this.listBoxAlarms.Location = new System.Drawing.Point(345, 100);
+            this.listBoxAlarms.Location = new System.Drawing.Point(345, 102);
             this.listBoxAlarms.Name = "listBoxAlarms";
-            this.listBoxAlarms.Size = new System.Drawing.Size(303, 342);
+            this.listBoxAlarms.Size = new System.Drawing.Size(303, 251);
             this.listBoxAlarms.TabIndex = 23;
             // 
             // btnAddAlarm
             // 
-            this.btnAddAlarm.Location = new System.Drawing.Point(345, 60);
+            this.btnAddAlarm.Location = new System.Drawing.Point(553, 63);
             this.btnAddAlarm.Name = "btnAddAlarm";
             this.btnAddAlarm.Size = new System.Drawing.Size(95, 23);
             this.btnAddAlarm.TabIndex = 24;
@@ -280,7 +282,7 @@
             // 
             // btnRemoveAlarm
             // 
-            this.btnRemoveAlarm.Location = new System.Drawing.Point(466, 60);
+            this.btnRemoveAlarm.Location = new System.Drawing.Point(345, 367);
             this.btnRemoveAlarm.Name = "btnRemoveAlarm";
             this.btnRemoveAlarm.Size = new System.Drawing.Size(95, 23);
             this.btnRemoveAlarm.TabIndex = 25;
@@ -314,11 +316,34 @@
             this.textBoxTagName.Size = new System.Drawing.Size(121, 20);
             this.textBoxTagName.TabIndex = 28;
             // 
+            // comboBoxAlarmType
+            // 
+            this.comboBoxAlarmType.FormattingEnabled = true;
+            this.comboBoxAlarmType.Items.AddRange(new object[] {
+            "Level 1",
+            "Level 2",
+            "Level 3"});
+            this.comboBoxAlarmType.Location = new System.Drawing.Point(419, 63);
+            this.comboBoxAlarmType.Name = "comboBoxAlarmType";
+            this.comboBoxAlarmType.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxAlarmType.TabIndex = 29;
+            // 
+            // labelAlarmType
+            // 
+            this.labelAlarmType.AutoSize = true;
+            this.labelAlarmType.Location = new System.Drawing.Point(345, 66);
+            this.labelAlarmType.Name = "labelAlarmType";
+            this.labelAlarmType.Size = new System.Drawing.Size(59, 13);
+            this.labelAlarmType.TabIndex = 30;
+            this.labelAlarmType.Text = "Alarm type:";
+            // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 493);
+            this.Controls.Add(this.labelAlarmType);
+            this.Controls.Add(this.comboBoxAlarmType);
             this.Controls.Add(this.textBoxTagName);
             this.Controls.Add(this.labelTagName);
             this.Controls.Add(this.buttonFinish);
@@ -386,5 +411,7 @@
         private System.Windows.Forms.Button buttonFinish;
         private System.Windows.Forms.Label labelTagName;
         private System.Windows.Forms.TextBox textBoxTagName;
+        private System.Windows.Forms.ComboBox comboBoxAlarmType;
+        private System.Windows.Forms.Label labelAlarmType;
     }
 }

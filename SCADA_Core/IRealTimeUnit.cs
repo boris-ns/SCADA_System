@@ -18,5 +18,8 @@ namespace SCADA_Core
 
         [OperationContract]
         bool SendValue(string rtuName, string message, byte[] signature);
+
+        [OperationContract]
+        void DisconnectRTU(string rtuName);
     }
 }

@@ -15,7 +15,7 @@ namespace SCADA_Core
         [DataMember] private bool enableScan;
         [DataMember] private bool manualMode;
 
-        //public virtual ICollection<Alarm> Alarms { get; set; }
+        public virtual ICollection<Alarm> Alarms { get; set; }
 
         public InputTag()
         {

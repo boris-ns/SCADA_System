@@ -22,7 +22,10 @@ namespace DatabaseManager
 
         private void btnAddAlarm_Click(object sender, EventArgs e)
         {
+            string tagName = textBoxTagName.Text;
+            string alarmType = comboBoxAlarmType.Text;
 
+            service.AddAlarm(tagName, alarmType, DateTime.Now);
         }
 
         private void btnRemoveAlarm_Click(object sender, EventArgs e)

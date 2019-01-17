@@ -493,6 +493,12 @@ namespace RealTimeUnit.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/SendValue", ReplyAction="http://tempuri.org/IRealTimeUnit/SendValueResponse")]
         System.Threading.Tasks.Task<bool> SendValueAsync(string rtuName, string message, byte[] signature);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU", ReplyAction="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse")]
+        void DisconnectRTU(string rtuName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU", ReplyAction="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse")]
+        System.Threading.Tasks.Task DisconnectRTUAsync(string rtuName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -544,6 +550,14 @@ namespace RealTimeUnit.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> SendValueAsync(string rtuName, string message, byte[] signature) {
             return base.Channel.SendValueAsync(rtuName, message, signature);
+        }
+        
+        public void DisconnectRTU(string rtuName) {
+            base.Channel.DisconnectRTU(rtuName);
+        }
+        
+        public System.Threading.Tasks.Task DisconnectRTUAsync(string rtuName) {
+            return base.Channel.DisconnectRTUAsync(rtuName);
         }
     }
     

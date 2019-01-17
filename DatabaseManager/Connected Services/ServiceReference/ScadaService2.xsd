@@ -9,7 +9,8 @@
   <xs:complexType name="Alarm">
     <xs:sequence>
       <xs:element minOccurs="0" name="alarmDateTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="alarmId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="alarmId" type="xs:int" />
+      <xs:element minOccurs="0" name="alarmType" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Alarm" nillable="true" type="tns:Alarm" />

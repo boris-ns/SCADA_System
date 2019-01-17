@@ -31,5 +31,11 @@ namespace SCADA_Core
 
         [OperationContract]
         void RemoveTag(string tagName);
+
+        [OperationContract]
+        void AddAlarm(string tagName, string alarmType, DateTime dateTimeActivated);
+
+        [OperationContract]
+        void RemoveAlarm(string tagName, string alarmId);
     }
 }

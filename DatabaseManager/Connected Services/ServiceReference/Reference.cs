@@ -26,7 +26,10 @@ namespace DatabaseManager.ServiceReference {
         private System.DateTime alarmDateTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string alarmIdField;
+        private int alarmIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string alarmTypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -52,14 +55,27 @@ namespace DatabaseManager.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string alarmId {
+        public int alarmId {
             get {
                 return this.alarmIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.alarmIdField, value) != true)) {
+                if ((this.alarmIdField.Equals(value) != true)) {
                     this.alarmIdField = value;
                     this.RaisePropertyChanged("alarmId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string alarmType {
+            get {
+                return this.alarmTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.alarmTypeField, value) != true)) {
+                    this.alarmTypeField = value;
+                    this.RaisePropertyChanged("alarmType");
                 }
             }
         }
@@ -489,10 +505,16 @@ namespace DatabaseManager.ServiceReference {
         System.Threading.Tasks.Task InitRealTimeUnitAsync(string rtuName, string publicKeyPath);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/SendValue", ReplyAction="http://tempuri.org/IRealTimeUnit/SendValueResponse")]
-        void SendValue(string message, byte[] signature);
+        bool SendValue(string rtuName, string message, byte[] signature);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/SendValue", ReplyAction="http://tempuri.org/IRealTimeUnit/SendValueResponse")]
-        System.Threading.Tasks.Task SendValueAsync(string message, byte[] signature);
+        System.Threading.Tasks.Task<bool> SendValueAsync(string rtuName, string message, byte[] signature);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU", ReplyAction="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse")]
+        void DisconnectRTU(string rtuName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU", ReplyAction="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse")]
+        System.Threading.Tasks.Task DisconnectRTUAsync(string rtuName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -538,12 +560,20 @@ namespace DatabaseManager.ServiceReference {
             return base.Channel.InitRealTimeUnitAsync(rtuName, publicKeyPath);
         }
         
-        public void SendValue(string message, byte[] signature) {
-            base.Channel.SendValue(message, signature);
+        public bool SendValue(string rtuName, string message, byte[] signature) {
+            return base.Channel.SendValue(rtuName, message, signature);
         }
         
-        public System.Threading.Tasks.Task SendValueAsync(string message, byte[] signature) {
-            return base.Channel.SendValueAsync(message, signature);
+        public System.Threading.Tasks.Task<bool> SendValueAsync(string rtuName, string message, byte[] signature) {
+            return base.Channel.SendValueAsync(rtuName, message, signature);
+        }
+        
+        public void DisconnectRTU(string rtuName) {
+            base.Channel.DisconnectRTU(rtuName);
+        }
+        
+        public System.Threading.Tasks.Task DisconnectRTUAsync(string rtuName) {
+            return base.Channel.DisconnectRTUAsync(rtuName);
         }
     }
     
@@ -641,6 +671,18 @@ namespace DatabaseManager.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveTag", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveTagResponse")]
         System.Threading.Tasks.Task RemoveTagAsync(string tagName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAlarm", ReplyAction="http://tempuri.org/IDatabaseManager/AddAlarmResponse")]
+        void AddAlarm(string tagName, string alarmType, System.DateTime dateTimeActivated);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAlarm", ReplyAction="http://tempuri.org/IDatabaseManager/AddAlarmResponse")]
+        System.Threading.Tasks.Task AddAlarmAsync(string tagName, string alarmType, System.DateTime dateTimeActivated);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveAlarm", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveAlarmResponse")]
+        void RemoveAlarm(string tagName, string alarmId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveAlarm", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveAlarmResponse")]
+        System.Threading.Tasks.Task RemoveAlarmAsync(string tagName, string alarmId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -716,6 +758,22 @@ namespace DatabaseManager.ServiceReference {
         
         public System.Threading.Tasks.Task RemoveTagAsync(string tagName) {
             return base.Channel.RemoveTagAsync(tagName);
+        }
+        
+        public void AddAlarm(string tagName, string alarmType, System.DateTime dateTimeActivated) {
+            base.Channel.AddAlarm(tagName, alarmType, dateTimeActivated);
+        }
+        
+        public System.Threading.Tasks.Task AddAlarmAsync(string tagName, string alarmType, System.DateTime dateTimeActivated) {
+            return base.Channel.AddAlarmAsync(tagName, alarmType, dateTimeActivated);
+        }
+        
+        public void RemoveAlarm(string tagName, string alarmId) {
+            base.Channel.RemoveAlarm(tagName, alarmId);
+        }
+        
+        public System.Threading.Tasks.Task RemoveAlarmAsync(string tagName, string alarmId) {
+            return base.Channel.RemoveAlarmAsync(tagName, alarmId);
         }
     }
 }

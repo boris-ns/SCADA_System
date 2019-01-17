@@ -106,6 +106,22 @@ namespace SCADA_Core
             return false;
         }
 
+        public void DisconnectRTU(string rtuName)
+        {
+            if (publicKeysForRTUs.ContainsKey(rtuName))
+            {
+                publicKeysForRTUs.Remove(rtuName);
+            }
+
+            if (realTimeDriverValues.ContainsKey(rtuName))
+            {
+                realTimeDriverValues.Remove(rtuName);
+            }
+
+            // @TODO: Stop tags from reading ? OR in method for reading
+            // always check if RTU is connected, when it isn't stop reading
+        }
+
         /*********************************************************/
         /*                    IAlarmDisplay                      */
         /*********************************************************/
@@ -182,6 +198,29 @@ namespace SCADA_Core
                 db.Tags.Remove(tagToRemove);
                 db.SaveChanges();
             }
+        }
+
+        public void AddAlarm(string tagName, string alarmType, DateTime dateTimeActivated)
+        {
+            // @TODO for now alarm cannot be added because you need first
+            // to add tag and then alarm, but this way alarm will be added first
+            // and we will get null pointer from LINQ query
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                InputTag tag = (InputTag)(from t in db.Tags where t.TagName == tagName select t).SingleOrDefault();
+
+                if (tag == null)
+                    return;
+
+                int alarmId = db.Alarms.Last().AlarmId + 1;
+                tag.Alarms.Add(new Alarm(alarmId, alarmType, dateTimeActivated));
+                db.SaveChanges();
+            }
+        }
+
+        public void RemoveAlarm(string tagName, string alarmId)
+        {
+            // @TODO implement this
         }
     }
 }

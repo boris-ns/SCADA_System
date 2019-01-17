@@ -220,6 +220,12 @@
   <wsdl:message name="IRealTimeUnit_SendValue_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendValueResponse" />
   </wsdl:message>
+  <wsdl:message name="IRealTimeUnit_DisconnectRTU_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectRTU" />
+  </wsdl:message>
+  <wsdl:message name="IRealTimeUnit_DisconnectRTU_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectRTUResponse" />
+  </wsdl:message>
   <wsdl:message name="IAlarmDisplay_AlarmDisplayClientInit_InputMessage">
     <wsdl:part name="parameters" element="tns:AlarmDisplayClientInit" />
   </wsdl:message>
@@ -281,6 +287,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/SendValue" message="tns:IRealTimeUnit_SendValue_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/SendValueResponse" message="tns:IRealTimeUnit_SendValue_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="DisconnectRTU">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU" message="tns:IRealTimeUnit_DisconnectRTU_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse" message="tns:IRealTimeUnit_DisconnectRTU_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAlarmDisplay">
     <wsdl:operation name="AlarmDisplayClientInit">
@@ -340,6 +350,15 @@
     </wsdl:operation>
     <wsdl:operation name="SendValue">
       <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/SendValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisconnectRTU">
+      <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/DisconnectRTU" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

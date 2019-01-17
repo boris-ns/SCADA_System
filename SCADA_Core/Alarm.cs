@@ -11,7 +11,8 @@ namespace SCADA_Core
     [DataContract]
     public class Alarm
     {
-        [DataMember] private string alarmId;
+        [DataMember] private int alarmId;
+        [DataMember] private string alarmType;
         [DataMember] private DateTime alarmDateTime;
 
         public virtual InputTag Tag { get; set; }
@@ -20,16 +21,23 @@ namespace SCADA_Core
         {
         }
 
-        public Alarm(string alarmId, DateTime alarmDateTime)
+        public Alarm(int alarmId, string alarmType, DateTime alarmDateTime)
         {
             this.alarmId = alarmId;
+            this.alarmType = alarmType;
             this.alarmDateTime = alarmDateTime;
         }
 
-        public string AlarmId
+        public int AlarmId
         {
             get { return alarmId; }
             set { alarmId = value; }
+        }
+
+        public string AlarmType
+        {
+            get { return alarmType; }
+            set { alarmType = value; }
         }
 
         public DateTime AlarmDateTime
