@@ -149,7 +149,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IAlarmDisplay_PrintAlarmsInfo_output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IAlarmDisplay_PrintAlarmInfo_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -172,7 +172,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSDualHttpBinding_IAlarmDisplay_PrintAlarmsInfo_Input_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IAlarmDisplay_PrintAlarmInfo_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -208,6 +208,12 @@
   <wsdl:message name="IRealTimeUnit_IsRTUNameAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsRTUNameAvailableResponse" />
   </wsdl:message>
+  <wsdl:message name="IRealTimeUnit_IsIOAddressAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsIOAddressAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IRealTimeUnit_IsIOAddressAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsIOAddressAvailableResponse" />
+  </wsdl:message>
   <wsdl:message name="IRealTimeUnit_InitRealTimeUnit_InputMessage">
     <wsdl:part name="parameters" element="tns:InitRealTimeUnit" />
   </wsdl:message>
@@ -226,16 +232,56 @@
   <wsdl:message name="IAlarmDisplay_AlarmDisplayClientInit_OutputMessage">
     <wsdl:part name="parameters" element="tns:AlarmDisplayClientInitResponse" />
   </wsdl:message>
-  <wsdl:message name="IAlarmDisplay_PrintAlarmsInfo_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:PrintAlarmsInfo" />
+  <wsdl:message name="IAlarmDisplay_PrintAlarmInfo_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PrintAlarmInfo" />
   </wsdl:message>
-  <wsdl:message name="IAlarmDisplay_PrintAlarmsInfo_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:PrintAlarmsInfoResponse" />
+  <wsdl:message name="IAlarmDisplay_PrintAlarmInfo_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PrintAlarmInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetTags_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTags" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_GetTags_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalInput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalInput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalInput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalInputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalOutput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalOutput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddDigitalOutput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDigitalOutputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogInput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogInput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogInput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogInputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogOutput_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogOutput" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_AddAnalogOutput_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAnalogOutputResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_RemoveTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTag" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_RemoveTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTagResponse" />
   </wsdl:message>
   <wsdl:portType name="IRealTimeUnit">
     <wsdl:operation name="IsRTUNameAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailable" message="tns:IRealTimeUnit_IsRTUNameAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailableResponse" message="tns:IRealTimeUnit_IsRTUNameAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsIOAddressAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailable" message="tns:IRealTimeUnit_IsIOAddressAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailableResponse" message="tns:IRealTimeUnit_IsIOAddressAvailable_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InitRealTimeUnit">
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/InitRealTimeUnit" message="tns:IRealTimeUnit_InitRealTimeUnit_InputMessage" />
@@ -251,15 +297,50 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IAlarmDisplay/AlarmDisplayClientInit" message="tns:IAlarmDisplay_AlarmDisplayClientInit_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAlarmDisplay/AlarmDisplayClientInitResponse" message="tns:IAlarmDisplay_AlarmDisplayClientInit_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PrintAlarmsInfo">
-      <wsdl:output wsaw:Action="http://tempuri.org/IAlarmDisplay/PrintAlarmsInfo" message="tns:IAlarmDisplay_PrintAlarmsInfo_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IAlarmDisplay/PrintAlarmsInfoResponse" message="tns:IAlarmDisplay_PrintAlarmsInfo_InputCallbackMessage" />
+    <wsdl:operation name="PrintAlarmInfo">
+      <wsdl:output wsaw:Action="http://tempuri.org/IAlarmDisplay/PrintAlarmInfo" message="tns:IAlarmDisplay_PrintAlarmInfo_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IAlarmDisplay/PrintAlarmInfoResponse" message="tns:IAlarmDisplay_PrintAlarmInfo_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IDatabaseManager">
+    <wsdl:operation name="GetTags">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/GetTags" message="tns:IDatabaseManager_GetTags_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/GetTagsResponse" message="tns:IDatabaseManager_GetTags_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalInput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalInput" message="tns:IDatabaseManager_AddDigitalInput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse" message="tns:IDatabaseManager_AddDigitalInput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalOutput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalOutput" message="tns:IDatabaseManager_AddDigitalOutput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddDigitalOutputResponse" message="tns:IDatabaseManager_AddDigitalOutput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogInput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogInput" message="tns:IDatabaseManager_AddAnalogInput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse" message="tns:IDatabaseManager_AddAnalogInput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogOutput">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogOutput" message="tns:IDatabaseManager_AddAnalogOutput_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/AddAnalogOutputResponse" message="tns:IDatabaseManager_AddAnalogOutput_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/RemoveTag" message="tns:IDatabaseManager_RemoveTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/RemoveTagResponse" message="tns:IDatabaseManager_RemoveTag_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IRealTimeUnit" type="tns:IRealTimeUnit">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="IsRTUNameAvailable">
       <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsIOAddressAvailable">
+      <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailable" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -300,15 +381,72 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PrintAlarmsInfo">
-      <soap12:operation soapAction="http://tempuri.org/IAlarmDisplay/PrintAlarmsInfo" style="document" />
+    <wsdl:operation name="PrintAlarmInfo">
+      <soap12:operation soapAction="http://tempuri.org/IAlarmDisplay/PrintAlarmInfo" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IAlarmDisplay_PrintAlarmsInfo_Input_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IAlarmDisplay_PrintAlarmInfo_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSDualHttpBinding_IAlarmDisplay_PrintAlarmsInfo_output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IAlarmDisplay_PrintAlarmInfo_output_policy" />
         <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IDatabaseManager" type="tns:IDatabaseManager">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTags">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/GetTags" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalInput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddDigitalInput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDigitalOutput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddDigitalOutput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogInput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddAnalogInput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAnalogOutput">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/AddAnalogOutput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTag">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/RemoveTag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
@@ -324,6 +462,9 @@
           <Upn>DESKTOP-A02CPCI\Boris</Upn>
         </Identity>
       </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IDatabaseManager" binding="tns:BasicHttpBinding_IDatabaseManager">
+      <soap:address location="http://localhost:50982/ScadaService.svc/DatabaseManager" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

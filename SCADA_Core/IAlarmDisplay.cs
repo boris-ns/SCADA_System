@@ -10,7 +10,7 @@ namespace SCADA_Core
     public interface IAlarmDisplayCallback
     {
         [OperationContract]
-        void PrintAlarmsInfo(List<Alarm> alarms);
+        void PrintAlarmInfo(Alarm alarm, string tagName, float measuredValue);
     }
 
     [ServiceContract(CallbackContract = typeof(IAlarmDisplayCallback))]

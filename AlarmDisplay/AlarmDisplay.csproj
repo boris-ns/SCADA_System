@@ -56,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\ServiceReference\AlarmDisplay.ServiceReference.ListOfTags.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference\ScadaService.wsdl" />
     <None Include="Connected Services\ServiceReference\ScadaService.xsd">
       <SubType>Designer</SubType>
