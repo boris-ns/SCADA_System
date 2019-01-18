@@ -80,6 +80,7 @@
     <Compile Include="DigitalOutput.cs" />
     <Compile Include="IAlarmDisplay.cs" />
     <Compile Include="IDatabaseManager.cs" />
+    <Compile Include="Initializer.cs" />
     <Compile Include="InputTag.cs" />
     <Compile Include="IRealTimeUnit.cs" />
     <Compile Include="ListOfTags.cs" />

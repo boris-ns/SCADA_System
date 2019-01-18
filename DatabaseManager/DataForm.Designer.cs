@@ -59,6 +59,14 @@
             this.textBoxTagName = new System.Windows.Forms.TextBox();
             this.comboBoxAlarmType = new System.Windows.Forms.ComboBox();
             this.labelAlarmType = new System.Windows.Forms.Label();
+            this.labelLowLimitAlarm = new System.Windows.Forms.Label();
+            this.labelHighLimitAlarm = new System.Windows.Forms.Label();
+            this.numericUpDownLowLimit = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownHighLimit = new System.Windows.Forms.NumericUpDown();
+            this.labelAlarmName = new System.Windows.Forms.Label();
+            this.textBoxAlarmName = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighLimit)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTagType
@@ -265,14 +273,14 @@
             // listBoxAlarms
             // 
             this.listBoxAlarms.FormattingEnabled = true;
-            this.listBoxAlarms.Location = new System.Drawing.Point(345, 102);
+            this.listBoxAlarms.Location = new System.Drawing.Point(345, 232);
             this.listBoxAlarms.Name = "listBoxAlarms";
-            this.listBoxAlarms.Size = new System.Drawing.Size(303, 251);
+            this.listBoxAlarms.Size = new System.Drawing.Size(303, 121);
             this.listBoxAlarms.TabIndex = 23;
             // 
             // btnAddAlarm
             // 
-            this.btnAddAlarm.Location = new System.Drawing.Point(553, 63);
+            this.btnAddAlarm.Location = new System.Drawing.Point(444, 203);
             this.btnAddAlarm.Name = "btnAddAlarm";
             this.btnAddAlarm.Size = new System.Drawing.Size(95, 23);
             this.btnAddAlarm.TabIndex = 24;
@@ -323,7 +331,7 @@
             "Level 1",
             "Level 2",
             "Level 3"});
-            this.comboBoxAlarmType.Location = new System.Drawing.Point(419, 63);
+            this.comboBoxAlarmType.Location = new System.Drawing.Point(418, 95);
             this.comboBoxAlarmType.Name = "comboBoxAlarmType";
             this.comboBoxAlarmType.Size = new System.Drawing.Size(121, 21);
             this.comboBoxAlarmType.TabIndex = 29;
@@ -331,17 +339,71 @@
             // labelAlarmType
             // 
             this.labelAlarmType.AutoSize = true;
-            this.labelAlarmType.Location = new System.Drawing.Point(345, 66);
+            this.labelAlarmType.Location = new System.Drawing.Point(345, 98);
             this.labelAlarmType.Name = "labelAlarmType";
             this.labelAlarmType.Size = new System.Drawing.Size(59, 13);
             this.labelAlarmType.TabIndex = 30;
             this.labelAlarmType.Text = "Alarm type:";
+            // 
+            // labelLowLimitAlarm
+            // 
+            this.labelLowLimitAlarm.AutoSize = true;
+            this.labelLowLimitAlarm.Location = new System.Drawing.Point(345, 131);
+            this.labelLowLimitAlarm.Name = "labelLowLimitAlarm";
+            this.labelLowLimitAlarm.Size = new System.Drawing.Size(50, 13);
+            this.labelLowLimitAlarm.TabIndex = 31;
+            this.labelLowLimitAlarm.Text = "Low limit:";
+            // 
+            // labelHighLimitAlarm
+            // 
+            this.labelHighLimitAlarm.AutoSize = true;
+            this.labelHighLimitAlarm.Location = new System.Drawing.Point(345, 170);
+            this.labelHighLimitAlarm.Name = "labelHighLimitAlarm";
+            this.labelHighLimitAlarm.Size = new System.Drawing.Size(52, 13);
+            this.labelHighLimitAlarm.TabIndex = 32;
+            this.labelHighLimitAlarm.Text = "High limit:";
+            // 
+            // numericUpDownLowLimit
+            // 
+            this.numericUpDownLowLimit.Location = new System.Drawing.Point(419, 129);
+            this.numericUpDownLowLimit.Name = "numericUpDownLowLimit";
+            this.numericUpDownLowLimit.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownLowLimit.TabIndex = 33;
+            // 
+            // numericUpDownHighLimit
+            // 
+            this.numericUpDownHighLimit.Location = new System.Drawing.Point(419, 168);
+            this.numericUpDownHighLimit.Name = "numericUpDownHighLimit";
+            this.numericUpDownHighLimit.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownHighLimit.TabIndex = 34;
+            // 
+            // labelAlarmName
+            // 
+            this.labelAlarmName.AutoSize = true;
+            this.labelAlarmName.Location = new System.Drawing.Point(348, 61);
+            this.labelAlarmName.Name = "labelAlarmName";
+            this.labelAlarmName.Size = new System.Drawing.Size(38, 13);
+            this.labelAlarmName.TabIndex = 35;
+            this.labelAlarmName.Text = "Name:";
+            // 
+            // textBoxAlarmName
+            // 
+            this.textBoxAlarmName.Location = new System.Drawing.Point(418, 58);
+            this.textBoxAlarmName.Name = "textBoxAlarmName";
+            this.textBoxAlarmName.Size = new System.Drawing.Size(121, 20);
+            this.textBoxAlarmName.TabIndex = 36;
             // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 493);
+            this.Controls.Add(this.textBoxAlarmName);
+            this.Controls.Add(this.labelAlarmName);
+            this.Controls.Add(this.numericUpDownHighLimit);
+            this.Controls.Add(this.numericUpDownLowLimit);
+            this.Controls.Add(this.labelHighLimitAlarm);
+            this.Controls.Add(this.labelLowLimitAlarm);
             this.Controls.Add(this.labelAlarmType);
             this.Controls.Add(this.comboBoxAlarmType);
             this.Controls.Add(this.textBoxTagName);
@@ -375,6 +437,8 @@
             this.Controls.Add(this.labelTagType);
             this.Name = "DataForm";
             this.Text = "DataForm";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -413,5 +477,11 @@
         private System.Windows.Forms.TextBox textBoxTagName;
         private System.Windows.Forms.ComboBox comboBoxAlarmType;
         private System.Windows.Forms.Label labelAlarmType;
+        private System.Windows.Forms.Label labelLowLimitAlarm;
+        private System.Windows.Forms.Label labelHighLimitAlarm;
+        private System.Windows.Forms.NumericUpDown numericUpDownLowLimit;
+        private System.Windows.Forms.NumericUpDown numericUpDownHighLimit;
+        private System.Windows.Forms.Label labelAlarmName;
+        private System.Windows.Forms.TextBox textBoxAlarmName;
     }
 }

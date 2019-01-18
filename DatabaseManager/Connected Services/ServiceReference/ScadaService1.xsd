@@ -15,10 +15,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="IsIOAddressAvailable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="address" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsIOAddressAvailableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsIOAddressAvailableResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="InitRealTimeUnit">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="rtuName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="address" type="xs:int" />
         <xs:element minOccurs="0" name="publicKeyPath" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -42,18 +57,6 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="SendValueResult" type="xs:boolean" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DisconnectRTU">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="rtuName" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DisconnectRTUResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="AlarmDisplayClientInit">
@@ -96,10 +99,11 @@
         <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" type="xs:int" />
         <xs:element minOccurs="0" name="scanTime" type="xs:float" />
         <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
         <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="alarms" nillable="true" type="q3:ArrayOfAlarm" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -114,7 +118,7 @@
         <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" type="xs:int" />
         <xs:element minOccurs="0" name="initValue" type="xs:float" />
       </xs:sequence>
     </xs:complexType>
@@ -130,13 +134,14 @@
         <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" type="xs:int" />
         <xs:element minOccurs="0" name="scanTime" type="xs:float" />
         <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
         <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
         <xs:element minOccurs="0" name="lowLimit" type="xs:float" />
         <xs:element minOccurs="0" name="highLimit" type="xs:float" />
         <xs:element minOccurs="0" name="units" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="alarms" nillable="true" type="q4:ArrayOfAlarm" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -151,7 +156,7 @@
         <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ioAddress" type="xs:int" />
         <xs:element minOccurs="0" name="initValue" type="xs:float" />
         <xs:element minOccurs="0" name="lowLimit" type="xs:float" />
         <xs:element minOccurs="0" name="highLimit" type="xs:float" />
@@ -172,33 +177,6 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveTagResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddAlarm">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="alarmType" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dateTimeActivated" type="xs:dateTime" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AddAlarmResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RemoveAlarm">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="alarmId" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RemoveAlarmResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

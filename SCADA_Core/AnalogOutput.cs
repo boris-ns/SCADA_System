@@ -18,7 +18,7 @@ namespace SCADA_Core
         {
         }
 
-        public AnalogOutput(string tagName, string description, string driver, string ioAddress, float initValue,
+        public AnalogOutput(string tagName, string description, string driver, int ioAddress, float initValue,
                             float lowLimit, float highLimit, string units)
             : base(tagName, description, driver, ioAddress, initValue)
         {

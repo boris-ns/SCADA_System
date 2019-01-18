@@ -13,19 +13,30 @@ namespace DatabaseManager
     public partial class DataForm : Form
     {
         private ServiceReference.DatabaseManagerClient service;
+        private List<ServiceReference.Alarm> alarms;
 
         public DataForm(ServiceReference.DatabaseManagerClient service)
         {
             InitializeComponent();
             this.service = service;
+            alarms = new List<ServiceReference.Alarm>();
         }
 
         private void btnAddAlarm_Click(object sender, EventArgs e)
         {
             string tagName = textBoxTagName.Text;
             string alarmType = comboBoxAlarmType.Text;
+            string alarmName = textBoxAlarmName.Text;
 
-            service.AddAlarm(tagName, alarmType, DateTime.Now);
+            alarms.Add(new ServiceReference.Alarm {
+                alarmName = alarmName,
+                alarmDateTime = DateTime.Now,
+                alarmType = alarmType,
+                lowLimit = (float)numericUpDownLowLimit.Value,
+                highLimit = (float)numericUpDownHighLimit.Value
+            });
+
+            listBoxAlarms.Items.Add(alarmName);
         }
 
         private void btnRemoveAlarm_Click(object sender, EventArgs e)
@@ -38,7 +49,7 @@ namespace DatabaseManager
             string tagName = textBoxTagName.Text;
             string description = richTextBoxDescription.Text;
             string driver = comboBoxDriver.Text;
-            string ioAddress = textBoxIOAddress.Text;
+            int ioAddress = int.Parse(textBoxIOAddress.Text);
             float initValue = 0;
             float lowLimit  = 0;
             float highLimit = 0;
@@ -47,7 +58,7 @@ namespace DatabaseManager
             {
                 case 0: // Digital Input
                     service.AddDigitalInput(tagName, description, driver, ioAddress, float.Parse(textBoxScanTime.Text),
-                                            checkBoxOnOffScan.Checked,checkBoxAutoManual.Checked);
+                                            checkBoxOnOffScan.Checked,checkBoxAutoManual.Checked, alarms.ToArray());
                     break;
 
                 case 1: // Digital Output
@@ -60,7 +71,7 @@ namespace DatabaseManager
                     highLimit = float.Parse(textBoxHighLimit.Text);
 
                     service.AddAnalogInput(tagName, description, driver, ioAddress, initValue, checkBoxOnOffScan.Checked, 
-                                            checkBoxAutoManual.Checked, lowLimit, highLimit, textBoxUnits.Text);
+                                            checkBoxAutoManual.Checked, lowLimit, highLimit, textBoxUnits.Text, alarms.ToArray());
                     break;
 
                 case 3: // Analog Output

@@ -10,7 +10,10 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="alarmDateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="alarmId" type="xs:int" />
+      <xs:element minOccurs="0" name="alarmName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="alarmType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="highLimit" type="xs:float" />
+      <xs:element minOccurs="0" name="lowLimit" type="xs:float" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Alarm" nillable="true" type="tns:Alarm" />
@@ -45,6 +48,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Tag">
         <xs:sequence>
+          <xs:element minOccurs="0" name="alarms" nillable="true" type="tns:ArrayOfAlarm" />
           <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
           <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
           <xs:element minOccurs="0" name="scanTime" type="xs:float" />
@@ -57,7 +61,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ioAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ioAddress" type="xs:int" />
       <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

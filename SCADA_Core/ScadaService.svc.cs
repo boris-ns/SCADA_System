@@ -13,13 +13,15 @@ namespace SCADA_Core
 {
     public class ScadaService : IRealTimeUnit, IAlarmDisplay, IDatabaseManager
     {
-        // Digital signatures
-        public static string fileLocationTags = @"C:\scadaConfig.xml";
+        // Attributes for digital signatures
+        //public static string fileLocationTags = @"D:\scadaConfig.xml";
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
         private static CspParameters csp = new CspParameters();
         private static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
 
-        private static Dictionary<string, float> realTimeDriverValues = new Dictionary<string, float>();
+        // Tags
+        public static string fileLocationTags = "scadaConfig.xml";
+        public static ListOfTags tags = new ListOfTags("");
 
         // Drivers
         private static SimulationDriver simulationDriver = new SimulationDriver(1000);
@@ -49,18 +51,16 @@ namespace SCADA_Core
             return deformatter.VerifySignature(hashVal, signature);
         }
 
-        // @TODO @FIX Not the best idea for this to be 'public static'
-        // Sometimes this function will break because it can't access requested file.
         public static void LoadTagsFromFile()
         {
-            if (!File.Exists(fileLocationTags))
+            if (!File.Exists(@"C:\Program Files (x86)\IIS Express\scadaConfig.xml"))
                 return;
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ListOfTags));
 
-            using (FileStream fs = new FileStream(fileLocationTags, FileMode.Open))
+            using (StreamReader reader = new StreamReader(fileLocationTags))
             {
-                //listOfTags = (ListOfTags)xmlSerializer.Deserialize(fs);
+                tags = (ListOfTags)xmlSerializer.Deserialize(reader);
             }
         }
 
@@ -101,30 +101,10 @@ namespace SCADA_Core
             if (!VerifyMessage(message, signature))
                 return false;
 
-            float generatedValue = 0.0f;
-            if (float.TryParse(message, out generatedValue))
-            {
-                realTimeDriverValues[rtuName] = generatedValue;
-                return true;
-            }
+            float generatedValue = float.Parse(message);
+            realTimeDriver.WriteValue(rtuName, generatedValue);
 
-            return false;
-        }
-
-        public void DisconnectRTU(string rtuName)
-        {
-            if (publicKeysForRTUs.ContainsKey(rtuName))
-            {
-                publicKeysForRTUs.Remove(rtuName);
-            }
-
-            if (realTimeDriverValues.ContainsKey(rtuName))
-            {
-                realTimeDriverValues.Remove(rtuName);
-            }
-
-            // @TODO: Stop tags from reading ? OR in method for reading
-            // always check if RTU is connected, when it isn't stop reading
+            return true;
         }
 
         /*********************************************************/
@@ -152,78 +132,97 @@ namespace SCADA_Core
 
         private void AddAlarmsToTag(InputTag tag, Alarm[] alarms)
         {
-            //int lastAlarmID = 0;
             //using (DatabaseContext db = new DatabaseContext())
             //{
             //    if (db.Alarms.Count() != 0)
             //        lastAlarmID = db.Alarms.Last().AlarmId;
             //}
 
-            //++lastAlarmID;
+            // Alarm is identified by tag name and alarmID
+            int lastAlarmId = 0;
+            Alarm lastAlarm = tag.Alarms.LastOrDefault();
+
+            if (lastAlarm != null)
+                ++lastAlarmId;
 
             foreach (Alarm alarm in alarms)
             {
-                //alarm.AlarmId = lastAlarmID;
-                //++lastAlarmID;
+                alarm.AlarmId = lastAlarmId;
+                ++lastAlarmId;
                 tag.Alarms.Add(alarm);
             }
         }
 
         public ListOfTags GetTags()
         {
-            ListOfTags list = new ListOfTags();
+            // Database way to load all tags
+            //ListOfTags list = new ListOfTags();
 
-            using (DatabaseContext db = new DatabaseContext())
-            {
-                list.DigitalInputs = (from tag in db.Tags.OfType<DigitalInput>() select tag).ToList();
-                list.DigitalOutputs = (from tag in db.Tags.OfType<DigitalOutput>() select tag).ToList();
-                list.AnalogInputs = (from tag in db.Tags.OfType<AnalogInput>() select tag).ToList();
-                list.AnalogOutputs = (from tag in db.Tags.OfType<AnalogOutput>() select tag).ToList();
-            }
+            //using (DatabaseContext db = new DatabaseContext())
+            //{
+            //    list.DigitalInputs = (from tag in db.Tags.OfType<DigitalInput>() select tag).ToList();
+            //    list.DigitalOutputs = (from tag in db.Tags.OfType<DigitalOutput>() select tag).ToList();
+            //    list.AnalogInputs = (from tag in db.Tags.OfType<AnalogInput>() select tag).ToList();
+            //    list.AnalogOutputs = (from tag in db.Tags.OfType<AnalogOutput>() select tag).ToList();
+            //}
 
-            return list;
+            //return list;
+
+            // XML way to load all tags
+            LoadTagsFromFile();
+            return tags;
         }
 
-        public void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
+        public void AddDigitalInput(string tagName, string description, string driver, int ioAddress,
                             float scanTime, bool enableScan, bool manualMode, Alarm[] alarms)
         {
             DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
             AddAlarmsToTag(newTag, alarms);
-            AddTagToDatabase(newTag);
+            //AddTagToDatabase(newTag);
+            tags.DigitalInputs.Add(newTag);
+            tags.WriteTagsToFile();
         }
 
-        public void AddDigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue)
+        public void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue)
         {
             DigitalOutput newTag = new DigitalOutput(tagName, description, driver, ioAddress, initValue);
-            AddTagToDatabase(newTag);
+            //AddTagToDatabase(newTag);
+            tags.DigitalOutputs.Add(newTag);
+            tags.WriteTagsToFile();
         }
 
-        public void AddAnalogInput(string tagName, string description, string driver, string ioAddress,
+        public void AddAnalogInput(string tagName, string description, string driver, int ioAddress,
                                     float scanTime, bool enableScan, bool manualMode,
                                     float lowLimit, float highLimit, string units, Alarm[] alarms)
         {
             AnalogInput newTag = new AnalogInput(tagName, description, driver, ioAddress, scanTime, 
                                                 enableScan, manualMode, lowLimit, highLimit, units);
             AddAlarmsToTag(newTag, alarms);
-            AddTagToDatabase(newTag);
+            //AddTagToDatabase(newTag);
+            tags.AnalogInputs.Add(newTag);
+            tags.WriteTagsToFile();
         }
 
-        public void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, 
+        public void AddAnalogOutput(string tagName, string description, string driver, int ioAddress, 
                                     float initValue, float lowLimit, float highLimit, string units)
         {
             AnalogOutput newTag = new AnalogOutput(tagName, description, driver, ioAddress,
                                                     initValue, lowLimit, highLimit, units);
-            AddTagToDatabase(newTag);
+            //AddTagToDatabase(newTag);
+            tags.AnalogOutputs.Add(newTag);
+            tags.WriteTagsToFile();
         }
 
         public void RemoveTag(string tagName)
         {
-            using (DatabaseContext db = new DatabaseContext())
-            {
-                Tag tagToRemove = (from tag in db.Tags where tag.TagName == tagName select tag).Single();
-                db.Tags.Remove(tagToRemove);
-                db.SaveChanges();
-            }
+            //using (DatabaseContext db = new DatabaseContext())
+            //{
+            //    Tag tagToRemove = (from tag in db.Tags where tag.TagName == tagName select tag).Single();
+            //    db.Tags.Remove(tagToRemove);
+            //    db.SaveChanges();
+            //}
+
+            tags.RemoveTag(tagName);
         }
 
     }

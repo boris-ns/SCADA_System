@@ -15,7 +15,7 @@ namespace SCADA_Core
         {
         }
 
-        public DigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue)
+        public DigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue)
             : base(tagName, description, driver, ioAddress, initValue)
         {
         }

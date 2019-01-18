@@ -12,10 +12,10 @@ namespace SCADA_Core
     [DataContract]
     public class ListOfTags
     {
-        [DataMember] private List<DigitalInput> digitalInputTags = null;
-        [DataMember] private List<DigitalOutput> digitalOutputTags = null;
-        [DataMember] private List<AnalogInput> analogInputTags = null;
-        [DataMember] private List<AnalogOutput> analogOutputTags = null;
+        [DataMember] private List<DigitalInput> digitalInputTags;
+        [DataMember] private List<DigitalOutput> digitalOutputTags;
+        [DataMember] private List<AnalogInput> analogInputTags;
+        [DataMember] private List<AnalogOutput> analogOutputTags;
 
         public ListOfTags()
         {
@@ -23,8 +23,11 @@ namespace SCADA_Core
             digitalOutputTags = new List<DigitalOutput>();
             analogInputTags = new List<AnalogInput>();
             analogOutputTags = new List<AnalogOutput>();
+        }
 
-            //ScadaService.LoadTagsFromFile();
+        public ListOfTags(string dummy)
+        {
+            ScadaService.LoadTagsFromFile();
         }
 
         public void WriteTagsToFile()
@@ -35,6 +38,20 @@ namespace SCADA_Core
             {
                 xmlSerializer.Serialize(fs, this);
             }
+        }
+
+        public void RemoveTag(string tagName)
+        {
+            if (DigitalInputs.Any(tag => tag.TagName == tagName))
+                DigitalInputs.Remove(new DigitalInput() { TagName = tagName });
+            else if (DigitalOutputs.Any(tag => tag.TagName == tagName))
+                DigitalOutputs.Remove(new DigitalOutput() { TagName = tagName });
+            else if (AnalogInputs.Any(tag => tag.TagName == tagName))
+                AnalogInputs.Remove(new AnalogInput() { TagName = tagName });
+            else if (AnalogOutputs.Any(tag => tag.TagName == tagName))
+                AnalogOutputs.Remove(new AnalogOutput() { TagName = tagName });
+
+            WriteTagsToFile();
         }
 
         [XmlArray("DigitalInputs"), XmlArrayItem(typeof(DigitalInput), ElementName = "DigitalInput")]

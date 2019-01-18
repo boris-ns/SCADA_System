@@ -14,28 +14,23 @@ namespace SCADA_Core
         ListOfTags GetTags();
 
         [OperationContract]
-        void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
-                            float scanTime, bool enableScan, bool manualMode);
+        void AddDigitalInput(string tagName, string description, string driver, int ioAddress,
+                            float scanTime, bool enableScan, bool manualMode, Alarm[] alarms);
 
         [OperationContract]
-        void AddDigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue);
+        void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue);
 
         [OperationContract]
-        void AddAnalogInput(string tagName, string description, string driver, string ioAddress,
+        void AddAnalogInput(string tagName, string description, string driver, int ioAddress,
                             float scanTime, bool enableScan, bool manualMode,
-                            float lowLimit, float highLimit, string units);
+                            float lowLimit, float highLimit, string units, Alarm[] alarms);
 
         [OperationContract]
-        void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, float initValue,
+        void AddAnalogOutput(string tagName, string description, string driver, int ioAddress, float initValue,
                             float lowLimit, float highLimit, string units);
 
         [OperationContract]
         void RemoveTag(string tagName);
 
-        [OperationContract]
-        void AddAlarm(string tagName, string alarmType, DateTime dateTimeActivated);
-
-        [OperationContract]
-        void RemoveAlarm(string tagName, string alarmId);
     }
 }

@@ -17,7 +17,7 @@ namespace SCADA_Core
         {
         }
 
-        public OutputTag(string tagName, string description, string driver, string ioAddress, float initValue)
+        public OutputTag(string tagName, string description, string driver, int ioAddress, float initValue)
             : base(tagName, description, driver, ioAddress)
         {
             this.initValue = initValue;
