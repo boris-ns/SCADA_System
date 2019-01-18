@@ -15,14 +15,14 @@ namespace SCADA_Core
 
         [OperationContract]
         void AddDigitalInput(string tagName, string description, string driver, int ioAddress,
-                            float scanTime, bool enableScan, bool manualMode, Alarm[] alarms);
+                            int scanTime, bool enableScan, bool manualMode, Alarm[] alarms);
 
         [OperationContract]
         void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue);
 
         [OperationContract]
         void AddAnalogInput(string tagName, string description, string driver, int ioAddress,
-                            float scanTime, bool enableScan, bool manualMode,
+                            int scanTime, bool enableScan, bool manualMode,
                             float lowLimit, float highLimit, string units, Alarm[] alarms);
 
         [OperationContract]

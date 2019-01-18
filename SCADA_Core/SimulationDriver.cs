@@ -48,6 +48,14 @@ namespace SCADA_Core
             thread.Abort();
         }
 
+        public float ReadValue(int ioAddress)
+        {
+            if (!ValuesOnAddresses.ContainsKey(ioAddress))
+                return 0.0f;
+
+            return ValuesOnAddresses[ioAddress];
+        }
+
         private float Sine()
         {
             return (float) (amplitude * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI));

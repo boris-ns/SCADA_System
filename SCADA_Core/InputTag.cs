@@ -11,7 +11,7 @@ namespace SCADA_Core
     [DataContract]
     public class InputTag : Tag
     {
-        [DataMember] private float scanTime;
+        [DataMember] private int scanTime;
         [DataMember] private bool enableScan;
         [DataMember] private bool manualMode;
 
@@ -25,7 +25,7 @@ namespace SCADA_Core
         }
 
         public InputTag(string tagName, string description, string driver, int ioAddress,
-                        float scanTime, bool enableScan, bool manualMode)
+                        int scanTime, bool enableScan, bool manualMode)
             : base(tagName, description, driver, ioAddress)
         {
             //Alarms = new List<Alarm>();
@@ -40,7 +40,7 @@ namespace SCADA_Core
             return base.ToString();
         }
 
-        public float ScanTime
+        public int ScanTime
         {
             get { return scanTime; }
             set { scanTime = value; }

@@ -19,7 +19,7 @@ namespace SCADA_Core
         }
 
         public AnalogInput(string tagName, string description, string driver, int ioAddress,
-                            float scanTime, bool enableScan, bool manualMode,
+                            int scanTime, bool enableScan, bool manualMode,
                             float lowLimit, float highLimit, string units)
             : base(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode)
         {

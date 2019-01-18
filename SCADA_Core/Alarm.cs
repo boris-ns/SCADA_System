@@ -19,7 +19,7 @@ namespace SCADA_Core
         [DataMember] private float lowLimit;
         [DataMember] private float highLimit;
 
-        public virtual InputTag Tag { get; set; }
+        //public virtual InputTag Tag { get; set; }
 
         public Alarm()
         {
@@ -33,7 +33,7 @@ namespace SCADA_Core
             this.alarmDateTime = alarmDateTime;
         }
 
-        [Key]
+        //[Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int AlarmId
         {

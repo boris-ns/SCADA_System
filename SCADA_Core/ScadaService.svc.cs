@@ -21,12 +21,17 @@ namespace SCADA_Core
 
         // Tags
         public static string fileLocationTags = "scadaConfig.xml";
+        public static TagProcessing tagProcessing = new TagProcessing();
         public static ListOfTags tags = new ListOfTags("");
 
         // Drivers
-        private static SimulationDriver simulationDriver = new SimulationDriver(1000);
-        private static RealTimeDriver realTimeDriver = new RealTimeDriver();
+        public static SimulationDriver simulationDriver = new SimulationDriver(1000);
+        public static RealTimeDriver realTimeDriver = new RealTimeDriver();
 
+        // Callbacks to clients
+        public static IAlarmDisplayCallback alarmDisplayCallback = null;
+
+        
 
         private static void LoadPublicKey(string path)
         {
@@ -51,6 +56,14 @@ namespace SCADA_Core
             return deformatter.VerifySignature(hashVal, signature);
         }
 
+        private static void StartProcessingLoadedTags()
+        {
+            foreach (Tag tag in tags.DigitalInputs)  tagProcessing.StartProcessing(tag);
+            foreach (Tag tag in tags.DigitalOutputs) tagProcessing.StartProcessing(tag);
+            foreach (Tag tag in tags.AnalogInputs)   tagProcessing.StartProcessing(tag);
+            foreach (Tag tag in tags.AnalogOutputs)  tagProcessing.StartProcessing(tag);
+        }
+
         public static void LoadTagsFromFile()
         {
             if (!File.Exists(@"C:\Program Files (x86)\IIS Express\scadaConfig.xml"))
@@ -62,11 +75,15 @@ namespace SCADA_Core
             {
                 tags = (ListOfTags)xmlSerializer.Deserialize(reader);
             }
+
+            StartProcessingLoadedTags();
         }
+
 
         /*********************************************************/
         /*                    IRealTimeUnit                      */
         /*********************************************************/
+
 
         public bool IsRTUNameAvailable(string name)
         {
@@ -107,19 +124,22 @@ namespace SCADA_Core
             return true;
         }
 
+
         /*********************************************************/
         /*                    IAlarmDisplay                      */
         /*********************************************************/
 
+
         public void AlarmDisplayClientInit()
         {
-            throw new NotImplementedException();
+            alarmDisplayCallback = OperationContext.Current.GetCallbackChannel<IAlarmDisplayCallback>();
         }
 
 
         /*********************************************************/
         /*                    IDatabaseManager                   */
         /*********************************************************/
+
 
         private void AddTagToDatabase(Tag tag)
         {
@@ -174,12 +194,13 @@ namespace SCADA_Core
         }
 
         public void AddDigitalInput(string tagName, string description, string driver, int ioAddress,
-                            float scanTime, bool enableScan, bool manualMode, Alarm[] alarms)
+                            int scanTime, bool enableScan, bool manualMode, Alarm[] alarms)
         {
             DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
             AddAlarmsToTag(newTag, alarms);
             //AddTagToDatabase(newTag);
             tags.DigitalInputs.Add(newTag);
+            tagProcessing.StartProcessing(newTag);
             tags.WriteTagsToFile();
         }
 
@@ -192,7 +213,7 @@ namespace SCADA_Core
         }
 
         public void AddAnalogInput(string tagName, string description, string driver, int ioAddress,
-                                    float scanTime, bool enableScan, bool manualMode,
+                                    int scanTime, bool enableScan, bool manualMode,
                                     float lowLimit, float highLimit, string units, Alarm[] alarms)
         {
             AnalogInput newTag = new AnalogInput(tagName, description, driver, ioAddress, scanTime, 

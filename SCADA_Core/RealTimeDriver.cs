@@ -35,6 +35,14 @@ namespace SCADA_Core
             }
         }
 
+        public float ReadValue(int address)
+        {
+            if (!ValuesOnAddresses.ContainsKey(address))
+                return 0.0f;
+
+            return ValuesOnAddresses[address];
+        }
+
         public void WriteValue(string rtuName, float value)
         {
             int address = SubscribedRTUs[rtuName];
