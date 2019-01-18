@@ -208,6 +208,12 @@
   <wsdl:message name="IRealTimeUnit_IsRTUNameAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsRTUNameAvailableResponse" />
   </wsdl:message>
+  <wsdl:message name="IRealTimeUnit_IsIOAddressAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsIOAddressAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IRealTimeUnit_IsIOAddressAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsIOAddressAvailableResponse" />
+  </wsdl:message>
   <wsdl:message name="IRealTimeUnit_InitRealTimeUnit_InputMessage">
     <wsdl:part name="parameters" element="tns:InitRealTimeUnit" />
   </wsdl:message>
@@ -219,12 +225,6 @@
   </wsdl:message>
   <wsdl:message name="IRealTimeUnit_SendValue_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendValueResponse" />
-  </wsdl:message>
-  <wsdl:message name="IRealTimeUnit_DisconnectRTU_InputMessage">
-    <wsdl:part name="parameters" element="tns:DisconnectRTU" />
-  </wsdl:message>
-  <wsdl:message name="IRealTimeUnit_DisconnectRTU_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DisconnectRTUResponse" />
   </wsdl:message>
   <wsdl:message name="IAlarmDisplay_AlarmDisplayClientInit_InputMessage">
     <wsdl:part name="parameters" element="tns:AlarmDisplayClientInit" />
@@ -279,6 +279,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailable" message="tns:IRealTimeUnit_IsRTUNameAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailableResponse" message="tns:IRealTimeUnit_IsRTUNameAvailable_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsIOAddressAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailable" message="tns:IRealTimeUnit_IsIOAddressAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailableResponse" message="tns:IRealTimeUnit_IsIOAddressAvailable_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="InitRealTimeUnit">
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/InitRealTimeUnit" message="tns:IRealTimeUnit_InitRealTimeUnit_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/InitRealTimeUnitResponse" message="tns:IRealTimeUnit_InitRealTimeUnit_OutputMessage" />
@@ -286,10 +290,6 @@
     <wsdl:operation name="SendValue">
       <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/SendValue" message="tns:IRealTimeUnit_SendValue_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/SendValueResponse" message="tns:IRealTimeUnit_SendValue_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="DisconnectRTU">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU" message="tns:IRealTimeUnit_DisconnectRTU_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse" message="tns:IRealTimeUnit_DisconnectRTU_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IAlarmDisplay">
@@ -339,6 +339,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsIOAddressAvailable">
+      <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InitRealTimeUnit">
       <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/InitRealTimeUnit" style="document" />
       <wsdl:input>
@@ -350,15 +359,6 @@
     </wsdl:operation>
     <wsdl:operation name="SendValue">
       <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/SendValue" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DisconnectRTU">
-      <soap:operation soapAction="http://tempuri.org/IRealTimeUnit/DisconnectRTU" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

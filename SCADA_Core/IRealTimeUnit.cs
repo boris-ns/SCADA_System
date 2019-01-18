@@ -14,12 +14,12 @@ namespace SCADA_Core
         bool IsRTUNameAvailable(string name);
 
         [OperationContract]
-        void InitRealTimeUnit(string rtuName, string publicKeyPath);
+        bool IsIOAddressAvailable(int address);
+
+        [OperationContract]
+        void InitRealTimeUnit(string rtuName, int address, string publicKeyPath);
 
         [OperationContract]
         bool SendValue(string rtuName, string message, byte[] signature);
-
-        [OperationContract]
-        void DisconnectRTU(string rtuName);
     }
 }

@@ -13,14 +13,17 @@ namespace SCADA_Core
 {
     public class ScadaService : IRealTimeUnit, IAlarmDisplay, IDatabaseManager
     {
+        // Digital signatures
         public static string fileLocationTags = @"C:\scadaConfig.xml";
-
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
-
         private static CspParameters csp = new CspParameters();
         private static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
 
         private static Dictionary<string, float> realTimeDriverValues = new Dictionary<string, float>();
+
+        // Drivers
+        private static SimulationDriver simulationDriver = new SimulationDriver(1000);
+        private static RealTimeDriver realTimeDriver = new RealTimeDriver();
 
 
         private static void LoadPublicKey(string path)
@@ -70,7 +73,12 @@ namespace SCADA_Core
             return !publicKeysForRTUs.ContainsKey(name);
         }
 
-        public void InitRealTimeUnit(string rtuName, string publicKeyPath)
+        public bool IsIOAddressAvailable(int address)
+        {
+            return !realTimeDriver.ValuesOnAddresses.ContainsKey(address);
+        }
+
+        public void InitRealTimeUnit(string rtuName, int address, string publicKeyPath)
         {
             if (publicKeysForRTUs.ContainsKey(rtuName))
                 return;
@@ -80,10 +88,7 @@ namespace SCADA_Core
                 publicKeysForRTUs[rtuName] = publicKeyPath;
             }
 
-            lock (realTimeDriverValues)
-            {
-                realTimeDriverValues[rtuName] = 0.0f;
-            }
+            realTimeDriver.RegisterRTU(rtuName, address);
         }
 
         public bool SendValue(string rtuName, string message, byte[] signature)
@@ -145,6 +150,25 @@ namespace SCADA_Core
             }
         }
 
+        private void AddAlarmsToTag(InputTag tag, Alarm[] alarms)
+        {
+            //int lastAlarmID = 0;
+            //using (DatabaseContext db = new DatabaseContext())
+            //{
+            //    if (db.Alarms.Count() != 0)
+            //        lastAlarmID = db.Alarms.Last().AlarmId;
+            //}
+
+            //++lastAlarmID;
+
+            foreach (Alarm alarm in alarms)
+            {
+                //alarm.AlarmId = lastAlarmID;
+                //++lastAlarmID;
+                tag.Alarms.Add(alarm);
+            }
+        }
+
         public ListOfTags GetTags()
         {
             ListOfTags list = new ListOfTags();
@@ -161,9 +185,10 @@ namespace SCADA_Core
         }
 
         public void AddDigitalInput(string tagName, string description, string driver, string ioAddress,
-                            float scanTime, bool enableScan, bool manualMode)
+                            float scanTime, bool enableScan, bool manualMode, Alarm[] alarms)
         {
             DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
+            AddAlarmsToTag(newTag, alarms);
             AddTagToDatabase(newTag);
         }
 
@@ -175,10 +200,11 @@ namespace SCADA_Core
 
         public void AddAnalogInput(string tagName, string description, string driver, string ioAddress,
                                     float scanTime, bool enableScan, bool manualMode,
-                                    float lowLimit, float highLimit, string units)
+                                    float lowLimit, float highLimit, string units, Alarm[] alarms)
         {
             AnalogInput newTag = new AnalogInput(tagName, description, driver, ioAddress, scanTime, 
                                                 enableScan, manualMode, lowLimit, highLimit, units);
+            AddAlarmsToTag(newTag, alarms);
             AddTagToDatabase(newTag);
         }
 
@@ -200,27 +226,5 @@ namespace SCADA_Core
             }
         }
 
-        public void AddAlarm(string tagName, string alarmType, DateTime dateTimeActivated)
-        {
-            // @TODO for now alarm cannot be added because you need first
-            // to add tag and then alarm, but this way alarm will be added first
-            // and we will get null pointer from LINQ query
-            using (DatabaseContext db = new DatabaseContext())
-            {
-                InputTag tag = (InputTag)(from t in db.Tags where t.TagName == tagName select t).SingleOrDefault();
-
-                if (tag == null)
-                    return;
-
-                int alarmId = db.Alarms.Last().AlarmId + 1;
-                tag.Alarms.Add(new Alarm(alarmId, alarmType, dateTimeActivated));
-                db.SaveChanges();
-            }
-        }
-
-        public void RemoveAlarm(string tagName, string alarmId)
-        {
-            // @TODO implement this
-        }
     }
 }

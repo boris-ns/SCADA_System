@@ -72,17 +72,24 @@ namespace RealTimeUnit
             rsa = new RSACryptoServiceProvider(csp);
 
             string rtuName = null;
+            int ioAddress = 0;
 
             do
             {
-                Console.Write("Input RTU name (id): ");
+                Console.Write("Enter RTU name (id): ");
                 rtuName = Console.ReadLine();
             } while (!rtuService.IsRTUNameAvailable(rtuName));
+
+            do
+            {
+                Console.Write("Enter I/O Address: ");
+                ioAddress = int.Parse(Console.ReadLine());
+            } while (!rtuService.IsIOAddressAvailable(ioAddress));
 
             string pathToKey = Path.Combine(EXPORT_FOLDER, rtuName + ".txt");
 
             ExportPublicKey(pathToKey);
-            rtuService.InitRealTimeUnit(rtuName, pathToKey);
+            rtuService.InitRealTimeUnit(rtuName, ioAddress, pathToKey);
             GenerateValues(rtuName);
         }
     }

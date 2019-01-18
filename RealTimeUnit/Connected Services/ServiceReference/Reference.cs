@@ -26,7 +26,19 @@ namespace RealTimeUnit.ServiceReference {
         private System.DateTime alarmDateTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string alarmIdField;
+        private int alarmIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string alarmNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string alarmTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float highLimitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float lowLimitField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -52,14 +64,66 @@ namespace RealTimeUnit.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string alarmId {
+        public int alarmId {
             get {
                 return this.alarmIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.alarmIdField, value) != true)) {
+                if ((this.alarmIdField.Equals(value) != true)) {
                     this.alarmIdField = value;
                     this.RaisePropertyChanged("alarmId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string alarmName {
+            get {
+                return this.alarmNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.alarmNameField, value) != true)) {
+                    this.alarmNameField = value;
+                    this.RaisePropertyChanged("alarmName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string alarmType {
+            get {
+                return this.alarmTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.alarmTypeField, value) != true)) {
+                    this.alarmTypeField = value;
+                    this.RaisePropertyChanged("alarmType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float highLimit {
+            get {
+                return this.highLimitField;
+            }
+            set {
+                if ((this.highLimitField.Equals(value) != true)) {
+                    this.highLimitField = value;
+                    this.RaisePropertyChanged("highLimit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float lowLimit {
+            get {
+                return this.lowLimitField;
+            }
+            set {
+                if ((this.lowLimitField.Equals(value) != true)) {
+                    this.lowLimitField = value;
+                    this.RaisePropertyChanged("lowLimit");
                 }
             }
         }
@@ -482,23 +546,23 @@ namespace RealTimeUnit.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailable", ReplyAction="http://tempuri.org/IRealTimeUnit/IsRTUNameAvailableResponse")]
         System.Threading.Tasks.Task<bool> IsRTUNameAvailableAsync(string name);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/InitRealTimeUnit", ReplyAction="http://tempuri.org/IRealTimeUnit/InitRealTimeUnitResponse")]
-        void InitRealTimeUnit(string rtuName, string publicKeyPath);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailable", ReplyAction="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailableResponse")]
+        bool IsIOAddressAvailable(int address);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailable", ReplyAction="http://tempuri.org/IRealTimeUnit/IsIOAddressAvailableResponse")]
+        System.Threading.Tasks.Task<bool> IsIOAddressAvailableAsync(int address);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/InitRealTimeUnit", ReplyAction="http://tempuri.org/IRealTimeUnit/InitRealTimeUnitResponse")]
-        System.Threading.Tasks.Task InitRealTimeUnitAsync(string rtuName, string publicKeyPath);
+        void InitRealTimeUnit(string rtuName, int address, string publicKeyPath);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/InitRealTimeUnit", ReplyAction="http://tempuri.org/IRealTimeUnit/InitRealTimeUnitResponse")]
+        System.Threading.Tasks.Task InitRealTimeUnitAsync(string rtuName, int address, string publicKeyPath);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/SendValue", ReplyAction="http://tempuri.org/IRealTimeUnit/SendValueResponse")]
         bool SendValue(string rtuName, string message, byte[] signature);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/SendValue", ReplyAction="http://tempuri.org/IRealTimeUnit/SendValueResponse")]
         System.Threading.Tasks.Task<bool> SendValueAsync(string rtuName, string message, byte[] signature);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU", ReplyAction="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse")]
-        void DisconnectRTU(string rtuName);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRealTimeUnit/DisconnectRTU", ReplyAction="http://tempuri.org/IRealTimeUnit/DisconnectRTUResponse")]
-        System.Threading.Tasks.Task DisconnectRTUAsync(string rtuName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -536,12 +600,20 @@ namespace RealTimeUnit.ServiceReference {
             return base.Channel.IsRTUNameAvailableAsync(name);
         }
         
-        public void InitRealTimeUnit(string rtuName, string publicKeyPath) {
-            base.Channel.InitRealTimeUnit(rtuName, publicKeyPath);
+        public bool IsIOAddressAvailable(int address) {
+            return base.Channel.IsIOAddressAvailable(address);
         }
         
-        public System.Threading.Tasks.Task InitRealTimeUnitAsync(string rtuName, string publicKeyPath) {
-            return base.Channel.InitRealTimeUnitAsync(rtuName, publicKeyPath);
+        public System.Threading.Tasks.Task<bool> IsIOAddressAvailableAsync(int address) {
+            return base.Channel.IsIOAddressAvailableAsync(address);
+        }
+        
+        public void InitRealTimeUnit(string rtuName, int address, string publicKeyPath) {
+            base.Channel.InitRealTimeUnit(rtuName, address, publicKeyPath);
+        }
+        
+        public System.Threading.Tasks.Task InitRealTimeUnitAsync(string rtuName, int address, string publicKeyPath) {
+            return base.Channel.InitRealTimeUnitAsync(rtuName, address, publicKeyPath);
         }
         
         public bool SendValue(string rtuName, string message, byte[] signature) {
@@ -550,14 +622,6 @@ namespace RealTimeUnit.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> SendValueAsync(string rtuName, string message, byte[] signature) {
             return base.Channel.SendValueAsync(rtuName, message, signature);
-        }
-        
-        public void DisconnectRTU(string rtuName) {
-            base.Channel.DisconnectRTU(rtuName);
-        }
-        
-        public System.Threading.Tasks.Task DisconnectRTUAsync(string rtuName) {
-            return base.Channel.DisconnectRTUAsync(rtuName);
         }
     }
     
@@ -627,10 +691,10 @@ namespace RealTimeUnit.ServiceReference {
         System.Threading.Tasks.Task<RealTimeUnit.ServiceReference.ListOfTags> GetTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        void AddDigitalInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode);
+        void AddDigitalInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, RealTimeUnit.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode);
+        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, RealTimeUnit.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalOutputResponse")]
         void AddDigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue);
@@ -639,10 +703,10 @@ namespace RealTimeUnit.ServiceReference {
         System.Threading.Tasks.Task AddDigitalOutputAsync(string tagName, string description, string driver, string ioAddress, float initValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        void AddAnalogInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units);
+        void AddAnalogInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, RealTimeUnit.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units);
+        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, RealTimeUnit.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogOutputResponse")]
         void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, float initValue, float lowLimit, float highLimit, string units);
@@ -692,12 +756,12 @@ namespace RealTimeUnit.ServiceReference {
             return base.Channel.GetTagsAsync();
         }
         
-        public void AddDigitalInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode) {
-            base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
+        public void AddDigitalInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, RealTimeUnit.ServiceReference.Alarm[] alarms) {
+            base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
         }
         
-        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode) {
-            return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
+        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, RealTimeUnit.ServiceReference.Alarm[] alarms) {
+            return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
         }
         
         public void AddDigitalOutput(string tagName, string description, string driver, string ioAddress, float initValue) {
@@ -708,12 +772,12 @@ namespace RealTimeUnit.ServiceReference {
             return base.Channel.AddDigitalOutputAsync(tagName, description, driver, ioAddress, initValue);
         }
         
-        public void AddAnalogInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units) {
-            base.Channel.AddAnalogInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units);
+        public void AddAnalogInput(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, RealTimeUnit.ServiceReference.Alarm[] alarms) {
+            base.Channel.AddAnalogInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
         }
         
-        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units) {
-            return base.Channel.AddAnalogInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units);
+        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, string ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, RealTimeUnit.ServiceReference.Alarm[] alarms) {
+            return base.Channel.AddAnalogInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
         }
         
         public void AddAnalogOutput(string tagName, string description, string driver, string ioAddress, float initValue, float lowLimit, float highLimit, string units) {
