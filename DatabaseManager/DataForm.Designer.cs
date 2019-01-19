@@ -260,6 +260,7 @@
             this.comboBoxDriver.Name = "comboBoxDriver";
             this.comboBoxDriver.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDriver.TabIndex = 21;
+            this.comboBoxDriver.SelectedIndexChanged += new System.EventHandler(this.comboBoxDriver_SelectedIndexChanged);
             // 
             // labelAlarms
             // 

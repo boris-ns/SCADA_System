@@ -364,5 +364,21 @@ namespace DatabaseManager
         {
             btnRemoveAlarm.Enabled = true;
         }
+
+        private void comboBoxDriver_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((string)comboBoxDriver.SelectedItem == "Real time driver")
+            {
+                checkBoxAutoManual.Checked = false;
+                checkBoxAutoManual.Enabled = false;
+                textBoxInitValue.Enabled = false;
+                textBoxInitValue.Text = "0";
+            }
+            else
+            {
+                checkBoxAutoManual.Enabled = true;
+                textBoxInitValue.Enabled = true;
+            }
+        }
     }
 }
