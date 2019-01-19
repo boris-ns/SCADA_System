@@ -8,18 +8,18 @@ namespace SCADA_Core
 {
     public class TagProcessing
     {
-        private Dictionary<Tag, Thread> threads;
+        private Dictionary<string, Thread> threads;
 
         public TagProcessing()
         {
-            threads = new Dictionary<Tag, Thread>();
+            threads = new Dictionary<string, Thread>();
         }
 
         public void StartProcessing(Tag tag)
         {
             Thread thread = null;
 
-            if (threads.ContainsKey(tag))
+            if (threads.ContainsKey(tag.TagName))
                 return;
 
             if (tag is DigitalInput)
@@ -31,16 +31,17 @@ namespace SCADA_Core
             else if (tag is AnalogOutput)
                 thread = new Thread(new ParameterizedThreadStart(ProcessAnalogOutput));
 
-            threads[tag] = thread;
+            threads[tag.TagName] = thread;
             thread.Start(tag);
         }
 
-        public void StopProcessing(Tag tag)
+        public void StopProcessing(string tagName)
         {
-            if (!threads.ContainsKey(tag))
+            if (!threads.ContainsKey(tagName))
                 return;
 
-            threads[tag].Abort();
+            threads[tagName].Abort();
+            threads.Remove(tagName);
         }
 
         private void WriteTagValueToDatabase(string tagName, float value)

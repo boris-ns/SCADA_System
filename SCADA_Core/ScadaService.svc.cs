@@ -255,12 +255,12 @@ namespace SCADA_Core
             //}
 
             tags.RemoveTag(tagName);
+            tagProcessing.StopProcessing(tagName);
         }
 
         public void EditDigitalInputTag(DigitalInput tag)
         {
-            tagProcessing.StopProcessing(tag);
-            tags.DigitalInputs.Remove(tag); // remove old tag
+            RemoveTag(tag.TagName);
             tags.DigitalInputs.Add(tag);
             tags.WriteTagsToFile();
             tagProcessing.StartProcessing(tag);
@@ -268,8 +268,7 @@ namespace SCADA_Core
 
         public void EditDigitalOutputTag(DigitalOutput tag)
         {
-            tagProcessing.StopProcessing(tag);
-            tags.DigitalOutputs.Remove(tag); // remove old tag
+            RemoveTag(tag.TagName);
             tags.DigitalOutputs.Add(tag);
             tags.WriteTagsToFile();
             tagProcessing.StartProcessing(tag);
@@ -277,8 +276,7 @@ namespace SCADA_Core
 
         public void EditAnalogInputTag(AnalogInput tag)
         {
-            tagProcessing.StopProcessing(tag);
-            tags.AnalogInputs.Remove(tag); // remove old tag
+            RemoveTag(tag.TagName);
             tags.AnalogInputs.Add(tag);
             tags.WriteTagsToFile();
             tagProcessing.StartProcessing(tag);
@@ -286,8 +284,7 @@ namespace SCADA_Core
 
         public void EditAnalogOutputTag(AnalogOutput tag)
         {
-            tagProcessing.StopProcessing(tag);
-            tags.AnalogOutputs.Remove(tag); // remove old tag
+            RemoveTag(tag.TagName);
             tags.AnalogOutputs.Add(tag);
             tags.WriteTagsToFile();
             tagProcessing.StartProcessing(tag);
