@@ -35,19 +35,28 @@ namespace TrendingComponent
             random = new Random();
         }
 
-        public void SendNewValue(string tagName, float value)
+        public void SendNewValue(string tagName, string tagType, float value)
         {
             if (!tagValues.ContainsKey(tagName))
             {
                 tagValues[tagName] = value;
 
-                Series series = chartTags.Series.Add(tagName);
+                Series series = null;
+                if (tagType == "digital")
+                {
+                    series = chartDigitalTags.Series.Add(tagName);
+                    chartDigitalTags.Legends.Add(tagName);
+                }
+                else
+                {
+                    series = chartAnalogTags.Series.Add(tagName);
+                    chartAnalogTags.Legends.Add(tagName);
+                }
+
                 series.ChartType = SeriesChartType.Line;
 
                 Color randomColor = Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
                 series.Color = randomColor;
-
-                chartTags.Legends.Add(tagName);
 
                 tagSeries[tagName] = series;
             }

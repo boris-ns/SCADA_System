@@ -85,37 +85,10 @@
     <Compile Include="IRealTimeUnit.cs" />
     <Compile Include="ITrending.cs" />
     <Compile Include="ListOfTags.cs" />
-    <Compile Include="Migrations\201901171901460_InputTag.cs" />
-    <Compile Include="Migrations\201901171901460_InputTag.Designer.cs">
-      <DependentUpon>201901171901460_InputTag.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901171918133_Alarm.cs" />
-    <Compile Include="Migrations\201901171918133_Alarm.Designer.cs">
-      <DependentUpon>201901171918133_Alarm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901181243495_Alarm1.cs" />
-    <Compile Include="Migrations\201901181243495_Alarm1.Designer.cs">
-      <DependentUpon>201901181243495_Alarm1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901181330279_Alarm2.cs" />
-    <Compile Include="Migrations\201901181330279_Alarm2.Designer.cs">
-      <DependentUpon>201901181330279_Alarm2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901181534132_Alarm3.cs" />
-    <Compile Include="Migrations\201901181534132_Alarm3.Designer.cs">
-      <DependentUpon>201901181534132_Alarm3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901181542155_Alarm4.cs" />
-    <Compile Include="Migrations\201901181542155_Alarm4.Designer.cs">
-      <DependentUpon>201901181542155_Alarm4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901181549398_Alarm5.cs" />
-    <Compile Include="Migrations\201901181549398_Alarm5.Designer.cs">
-      <DependentUpon>201901181549398_Alarm5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201901181550366_Tag.cs" />
-    <Compile Include="Migrations\201901181550366_Tag.Designer.cs">
-      <DependentUpon>201901181550366_Tag.cs</DependentUpon>
+    <Compile Include="Measurement.cs" />
+    <Compile Include="Migrations\201901191757142_Measurement.cs" />
+    <Compile Include="Migrations\201901191757142_Measurement.Designer.cs">
+      <DependentUpon>201901191757142_Measurement.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OutputTag.cs" />
@@ -141,29 +114,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901171901460_InputTag.resx">
-      <DependentUpon>201901171901460_InputTag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901171918133_Alarm.resx">
-      <DependentUpon>201901171918133_Alarm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901181243495_Alarm1.resx">
-      <DependentUpon>201901181243495_Alarm1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901181330279_Alarm2.resx">
-      <DependentUpon>201901181330279_Alarm2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901181534132_Alarm3.resx">
-      <DependentUpon>201901181534132_Alarm3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901181542155_Alarm4.resx">
-      <DependentUpon>201901181542155_Alarm4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901181549398_Alarm5.resx">
-      <DependentUpon>201901181549398_Alarm5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901181550366_Tag.resx">
-      <DependentUpon>201901181550366_Tag.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901191757142_Measurement.resx">
+      <DependentUpon>201901191757142_Measurement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

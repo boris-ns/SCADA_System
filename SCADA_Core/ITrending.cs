@@ -10,7 +10,7 @@ namespace SCADA_Core
     public interface ITrendingCallback
     {
         [OperationContract]
-        void SendNewValue(string tagName, float value);
+        void SendNewValue(string tagName, string tagType, float value);
     }
 
     [ServiceContract(CallbackContract = typeof(ITrendingCallback))]

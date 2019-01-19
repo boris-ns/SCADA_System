@@ -197,6 +197,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tagType" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="value" type="xs:float" />
       </xs:sequence>
     </xs:complexType>

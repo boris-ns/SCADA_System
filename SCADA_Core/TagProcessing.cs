@@ -43,6 +43,14 @@ namespace SCADA_Core
             threads[tag].Abort();
         }
 
+        private void WriteTagValueToDatabase(string tagName, float value)
+        {
+            using (DatabaseContext db = new DatabaseContext())
+            {
+                db.Measurements.Add(new Measurement(tagName, value, DateTime.Now));
+            }
+        }
+
         private void ProcessDigitalInput(object tag)
         {
             // @TODO dont forget on/off scan and auto/manual variables 
@@ -51,23 +59,32 @@ namespace SCADA_Core
 
             while (true)
             {
+                // Digital input can be connected only to the simulation driver
                 float valueFromDriver = ScadaService.simulationDriver.ReadValue(diTag.IOAddress);
 
-                foreach (Alarm alarm in diTag.Alarms)
-                {
-                    if (valueFromDriver < alarm.LowLimit || valueFromDriver > alarm.HighLimit)
-                    {
-                        alarm.AlarmDateTime = DateTime.Now;
+                if (valueFromDriver <= 0) valueFromDriver = 0.0f;
+                else valueFromDriver = 1.0f;
 
-                        if (ScadaService.alarmDisplayCallback != null)
-                            ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, diTag.TagName, valueFromDriver);
+                if (diTag.EnableScan)
+                {
+                    // Alarm logging
+                    foreach (Alarm alarm in diTag.Alarms)
+                    {
+                        if (valueFromDriver < alarm.LowLimit || valueFromDriver > alarm.HighLimit)
+                        {
+                            alarm.AlarmDateTime = DateTime.Now;
+
+                            if (ScadaService.alarmDisplayCallback != null)
+                                ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, diTag.TagName, valueFromDriver);
+                        }
                     }
+
+                    // Send values to trending
+                    if (ScadaService.trendingCallback != null)
+                        ScadaService.trendingCallback.SendNewValue(diTag.TagName, "digital", valueFromDriver);
                 }
 
-                if (ScadaService.trendingCallback != null)
-                    ScadaService.trendingCallback.SendNewValue(diTag.TagName, valueFromDriver);
-
-                // notify database - write measured value into database
+                WriteTagValueToDatabase(diTag.TagName, valueFromDriver);
 
                 Thread.Sleep(diTag.ScanTime * 1000);
             }
@@ -75,7 +92,9 @@ namespace SCADA_Core
 
         private void ProcessDigitalOutput(object tag)
         {
-            // @TODO dont forget on/off scan and auto/manual variables 
+            // Digital output can be connected only to the simulation driver
+            DigitalOutput doTag = (DigitalOutput)tag;
+
 
         }
 
@@ -89,22 +108,28 @@ namespace SCADA_Core
             {
                 float valueFromDriver = 0.0f;
 
+                // Only analog input can be connected to the real time driver
                 if (aiTag.Driver == "Simulation driver")
                     valueFromDriver = ScadaService.simulationDriver.ReadValue(aiTag.IOAddress);
                 else
                     valueFromDriver = ScadaService.realTimeDriver.ReadValue(aiTag.IOAddress);
 
-                foreach (Alarm alarm in aiTag.Alarms)
+                if (aiTag.EnableScan)
                 {
-                    if (valueFromDriver < alarm.LowLimit || valueFromDriver > alarm.HighLimit)
+                    foreach (Alarm alarm in aiTag.Alarms)
                     {
-                        alarm.AlarmDateTime = DateTime.Now;
-                        ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, aiTag.TagName, valueFromDriver);
+                        if (valueFromDriver < alarm.LowLimit || valueFromDriver > alarm.HighLimit)
+                        {
+                            alarm.AlarmDateTime = DateTime.Now;
+                            ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, aiTag.TagName, valueFromDriver);
+                        }
                     }
+
+                    if (ScadaService.trendingCallback != null)
+                        ScadaService.trendingCallback.SendNewValue(aiTag.TagName, "analog", valueFromDriver);
                 }
 
-                // notify Trending client
-                // notify database - write measured value into database
+                WriteTagValueToDatabase(aiTag.TagName, valueFromDriver);
 
                 Thread.Sleep(aiTag.ScanTime * 1000);
             }
@@ -112,7 +137,10 @@ namespace SCADA_Core
 
         private void ProcessAnalogOutput(object tag)
         {
-            // @TODO dont forget on/off scan and auto/manual variables 
+            // Analog output can be only connected to the simulation driver
+
+            AnalogOutput aoTag = (AnalogOutput)tag;
+
 
         }
     }

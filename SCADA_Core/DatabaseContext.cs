@@ -8,6 +8,7 @@ namespace SCADA_Core
 {
     public class DatabaseContext : DbContext
     {
+        public virtual DbSet<Measurement> Measurements { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Alarm> Alarms { get; set; }
 

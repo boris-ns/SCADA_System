@@ -828,7 +828,7 @@ namespace TrendingComponent.ServiceReference {
     public interface ITrendingCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrending/SendNewValue", ReplyAction="http://tempuri.org/ITrending/SendNewValueResponse")]
-        void SendNewValue(string tagName, float value);
+        void SendNewValue(string tagName, string tagType, float value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
