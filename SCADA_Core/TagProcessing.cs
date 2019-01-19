@@ -58,11 +58,15 @@ namespace SCADA_Core
                     if (valueFromDriver < alarm.LowLimit || valueFromDriver > alarm.HighLimit)
                     {
                         alarm.AlarmDateTime = DateTime.Now;
-                        ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, diTag.TagName, valueFromDriver);
+
+                        if (ScadaService.alarmDisplayCallback != null)
+                            ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, diTag.TagName, valueFromDriver);
                     }
                 }
 
-                // notify Trending client
+                if (ScadaService.trendingCallback != null)
+                    ScadaService.trendingCallback.SendNewValue(diTag.TagName, valueFromDriver);
+
                 // notify database - write measured value into database
 
                 Thread.Sleep(diTag.ScanTime * 1000);

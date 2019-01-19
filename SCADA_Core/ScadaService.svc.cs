@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace SCADA_Core
 {
-    public class ScadaService : IRealTimeUnit, IAlarmDisplay, IDatabaseManager
+    public class ScadaService : IRealTimeUnit, IAlarmDisplay, IDatabaseManager, ITrending
     {
         // Attributes for digital signatures
         //public static string fileLocationTags = @"D:\scadaConfig.xml";
@@ -30,7 +30,7 @@ namespace SCADA_Core
 
         // Callbacks to clients
         public static IAlarmDisplayCallback alarmDisplayCallback = null;
-
+        public static ITrendingCallback trendingCallback = null;
         
 
         private static void LoadPublicKey(string path)
@@ -133,6 +133,17 @@ namespace SCADA_Core
         public void AlarmDisplayClientInit()
         {
             alarmDisplayCallback = OperationContext.Current.GetCallbackChannel<IAlarmDisplayCallback>();
+        }
+
+
+        /*********************************************************/
+        /*                       ITrending                       */
+        /*********************************************************/
+
+
+        public void TrendingClientInit()
+        {
+            trendingCallback = OperationContext.Current.GetCallbackChannel<ITrendingCallback>();
         }
 
 

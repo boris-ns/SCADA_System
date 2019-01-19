@@ -83,6 +83,7 @@
     <Compile Include="Initializer.cs" />
     <Compile Include="InputTag.cs" />
     <Compile Include="IRealTimeUnit.cs" />
+    <Compile Include="ITrending.cs" />
     <Compile Include="ListOfTags.cs" />
     <Compile Include="Migrations\201901171901460_InputTag.cs" />
     <Compile Include="Migrations\201901171901460_InputTag.Designer.cs">

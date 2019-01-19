@@ -11,7 +11,7 @@ namespace SCADA_Core
         // key - ioAddress, value - value that SimDriver will write
         public Dictionary<int, float> ValuesOnAddresses { get; set; }
 
-        private const double amplitude = 100;
+        private const float amplitude = 100;
         private Thread thread;
 
         public SimulationDriver(int milliseconds)
@@ -58,12 +58,12 @@ namespace SCADA_Core
 
         private float Sine()
         {
-            return (float) (amplitude * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI));
+            return (float) (amplitude * Math.Sin((float)DateTime.Now.Second / 60 * Math.PI));
         }
 
         private float Cosine()
         {
-            return (float) (amplitude * Math.Cos((double)DateTime.Now.Second / 60 * Math.PI));
+            return (float) (amplitude * Math.Cos((float)DateTime.Now.Second / 60 * Math.PI));
         }
 
         private float Ramp()
