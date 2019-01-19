@@ -497,7 +497,7 @@ namespace DatabaseManager.ServiceReference {
         private bool manualModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private float scanTimeField;
+        private int scanTimeField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public DatabaseManager.ServiceReference.Alarm[] alarms {
@@ -539,7 +539,7 @@ namespace DatabaseManager.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public float scanTime {
+        public int scanTime {
             get {
                 return this.scanTimeField;
             }
@@ -655,8 +655,8 @@ namespace DatabaseManager.ServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IAlarmDisplayCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAlarmDisplay/PrintAlarmsInfo", ReplyAction="http://tempuri.org/IAlarmDisplay/PrintAlarmsInfoResponse")]
-        void PrintAlarmsInfo(DatabaseManager.ServiceReference.Alarm[] alarms);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAlarmDisplay/PrintAlarmInfo", ReplyAction="http://tempuri.org/IAlarmDisplay/PrintAlarmInfoResponse")]
+        void PrintAlarmInfo(DatabaseManager.ServiceReference.Alarm alarm, string tagName, float measuredValue);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -707,10 +707,10 @@ namespace DatabaseManager.ServiceReference {
         System.Threading.Tasks.Task<DatabaseManager.ServiceReference.ListOfTags> GetTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        void AddDigitalInput(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms);
+        void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms);
+        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalOutputResponse")]
         void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue);
@@ -719,10 +719,10 @@ namespace DatabaseManager.ServiceReference {
         System.Threading.Tasks.Task AddDigitalOutputAsync(string tagName, string description, string driver, int ioAddress, float initValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        void AddAnalogInput(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms);
+        void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms);
+        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogOutputResponse")]
         void AddAnalogOutput(string tagName, string description, string driver, int ioAddress, float initValue, float lowLimit, float highLimit, string units);
@@ -735,6 +735,30 @@ namespace DatabaseManager.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveTag", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveTagResponse")]
         System.Threading.Tasks.Task RemoveTagAsync(string tagName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalInputTagResponse")]
+        void EditDigitalInputTag(DatabaseManager.ServiceReference.DigitalInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalInputTagResponse")]
+        System.Threading.Tasks.Task EditDigitalInputTagAsync(DatabaseManager.ServiceReference.DigitalInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalOutputTagResponse")]
+        void EditDigitalOutputTag(DatabaseManager.ServiceReference.DigitalOutput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalOutputTagResponse")]
+        System.Threading.Tasks.Task EditDigitalOutputTagAsync(DatabaseManager.ServiceReference.DigitalOutput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogInputTagResponse")]
+        void EditAnalogInputTag(DatabaseManager.ServiceReference.AnalogInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogInputTagResponse")]
+        System.Threading.Tasks.Task EditAnalogInputTagAsync(DatabaseManager.ServiceReference.AnalogInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogOutputTagResponse")]
+        void EditAnalogOutputTag(DatabaseManager.ServiceReference.AnalogOutput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogOutputTagResponse")]
+        System.Threading.Tasks.Task EditAnalogOutputTagAsync(DatabaseManager.ServiceReference.AnalogOutput tag);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -772,11 +796,11 @@ namespace DatabaseManager.ServiceReference {
             return base.Channel.GetTagsAsync();
         }
         
-        public void AddDigitalInput(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms) {
+        public void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms) {
             base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
         }
         
-        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms) {
+        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms) {
             return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
         }
         
@@ -788,11 +812,11 @@ namespace DatabaseManager.ServiceReference {
             return base.Channel.AddDigitalOutputAsync(tagName, description, driver, ioAddress, initValue);
         }
         
-        public void AddAnalogInput(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms) {
+        public void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms) {
             base.Channel.AddAnalogInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
         }
         
-        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, float scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms) {
+        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms) {
             return base.Channel.AddAnalogInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
         }
         
@@ -810,6 +834,93 @@ namespace DatabaseManager.ServiceReference {
         
         public System.Threading.Tasks.Task RemoveTagAsync(string tagName) {
             return base.Channel.RemoveTagAsync(tagName);
+        }
+        
+        public void EditDigitalInputTag(DatabaseManager.ServiceReference.DigitalInput tag) {
+            base.Channel.EditDigitalInputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditDigitalInputTagAsync(DatabaseManager.ServiceReference.DigitalInput tag) {
+            return base.Channel.EditDigitalInputTagAsync(tag);
+        }
+        
+        public void EditDigitalOutputTag(DatabaseManager.ServiceReference.DigitalOutput tag) {
+            base.Channel.EditDigitalOutputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditDigitalOutputTagAsync(DatabaseManager.ServiceReference.DigitalOutput tag) {
+            return base.Channel.EditDigitalOutputTagAsync(tag);
+        }
+        
+        public void EditAnalogInputTag(DatabaseManager.ServiceReference.AnalogInput tag) {
+            base.Channel.EditAnalogInputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditAnalogInputTagAsync(DatabaseManager.ServiceReference.AnalogInput tag) {
+            return base.Channel.EditAnalogInputTagAsync(tag);
+        }
+        
+        public void EditAnalogOutputTag(DatabaseManager.ServiceReference.AnalogOutput tag) {
+            base.Channel.EditAnalogOutputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditAnalogOutputTagAsync(DatabaseManager.ServiceReference.AnalogOutput tag) {
+            return base.Channel.EditAnalogOutputTagAsync(tag);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.ITrending", CallbackContract=typeof(DatabaseManager.ServiceReference.ITrendingCallback))]
+    public interface ITrending {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrending/TrendingClientInit", ReplyAction="http://tempuri.org/ITrending/TrendingClientInitResponse")]
+        void TrendingClientInit();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrending/TrendingClientInit", ReplyAction="http://tempuri.org/ITrending/TrendingClientInitResponse")]
+        System.Threading.Tasks.Task TrendingClientInitAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ITrendingCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITrending/SendNewValue", ReplyAction="http://tempuri.org/ITrending/SendNewValueResponse")]
+        void SendNewValue(string tagName, string tagType, float value);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ITrendingChannel : DatabaseManager.ServiceReference.ITrending, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class TrendingClient : System.ServiceModel.DuplexClientBase<DatabaseManager.ServiceReference.ITrending>, DatabaseManager.ServiceReference.ITrending {
+        
+        public TrendingClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public TrendingClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public TrendingClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public TrendingClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public TrendingClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void TrendingClientInit() {
+            base.Channel.TrendingClientInit();
+        }
+        
+        public System.Threading.Tasks.Task TrendingClientInitAsync() {
+            return base.Channel.TrendingClientInitAsync();
         }
     }
 }

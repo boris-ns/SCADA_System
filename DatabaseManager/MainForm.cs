@@ -25,7 +25,7 @@ namespace DatabaseManager
         private void LoadTags()
         {
             ServiceReference.ListOfTags tags = dbManagerService.GetTags();
-
+            
             foreach (var tag in tags.digitalInputTags)
                 listBoxTags.Items.Add(tag.tagName);
 
@@ -61,7 +61,22 @@ namespace DatabaseManager
 
         private void btnEditTag_Click(object sender, EventArgs e)
         {
+            string selectedTag = (string)listBoxTags.SelectedItem;
+            ServiceReference.ListOfTags tags = dbManagerService.GetTags();
 
+            DataForm form = null;
+
+            if (tags.digitalInputTags.Any(tag => tag.tagName == selectedTag))
+                form = new DataForm(dbManagerService, tags.digitalInputTags.Where(tag => tag.tagName == selectedTag).Single());
+            else if (tags.digitalOutputTags.Any(tag => tag.tagName == selectedTag))
+                form = new DataForm(dbManagerService, tags.digitalOutputTags.Where(tag => tag.tagName == selectedTag).Single());
+            else if (tags.analogInputTags.Any(tag => tag.tagName == selectedTag))
+                form = new DataForm(dbManagerService, tags.analogInputTags.Where(tag => tag.tagName == selectedTag).Single());
+            else if (tags.analogOutputTags.Any(tag => tag.tagName == selectedTag))
+                form = new DataForm(dbManagerService, tags.analogOutputTags.Where(tag => tag.tagName == selectedTag).Single());
+
+            if (form != null)
+                form.Show();
         }
 
         private void buttonRefresh_Click(object sender, EventArgs e)
@@ -72,6 +87,7 @@ namespace DatabaseManager
         private void listBoxTags_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnRemoveTag.Enabled = true;
+            btnEditTag.Enabled = true;
         }
     }
 }

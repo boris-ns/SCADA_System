@@ -257,5 +257,40 @@ namespace SCADA_Core
             tags.RemoveTag(tagName);
         }
 
+        public void EditDigitalInputTag(DigitalInput tag)
+        {
+            tagProcessing.StopProcessing(tag);
+            tags.DigitalInputs.Remove(tag); // remove old tag
+            tags.DigitalInputs.Add(tag);
+            tags.WriteTagsToFile();
+            tagProcessing.StartProcessing(tag);
+        }
+
+        public void EditDigitalOutputTag(DigitalOutput tag)
+        {
+            tagProcessing.StopProcessing(tag);
+            tags.DigitalOutputs.Remove(tag); // remove old tag
+            tags.DigitalOutputs.Add(tag);
+            tags.WriteTagsToFile();
+            tagProcessing.StartProcessing(tag);
+        }
+
+        public void EditAnalogInputTag(AnalogInput tag)
+        {
+            tagProcessing.StopProcessing(tag);
+            tags.AnalogInputs.Remove(tag); // remove old tag
+            tags.AnalogInputs.Add(tag);
+            tags.WriteTagsToFile();
+            tagProcessing.StartProcessing(tag);
+        }
+
+        public void EditAnalogOutputTag(AnalogOutput tag)
+        {
+            tagProcessing.StopProcessing(tag);
+            tags.AnalogOutputs.Remove(tag); // remove old tag
+            tags.AnalogOutputs.Add(tag);
+            tags.WriteTagsToFile();
+            tagProcessing.StartProcessing(tag);
+        }
     }
 }

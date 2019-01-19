@@ -32,5 +32,16 @@ namespace SCADA_Core
         [OperationContract]
         void RemoveTag(string tagName);
 
+        [OperationContract]
+        void EditDigitalInputTag(DigitalInput tag);
+
+        [OperationContract]
+        void EditDigitalOutputTag(DigitalOutput tag);
+
+        [OperationContract]
+        void EditAnalogInputTag(AnalogInput tag);
+
+        [OperationContract]
+        void EditAnalogOutputTag(AnalogOutput tag);
     }
 }

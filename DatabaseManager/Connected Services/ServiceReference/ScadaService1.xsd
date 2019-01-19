@@ -69,14 +69,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PrintAlarmsInfo">
+  <xs:element name="PrintAlarmInfo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="alarms" nillable="true" type="q1:ArrayOfAlarm" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="alarm" nillable="true" type="q1:Alarm" />
+        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="measuredValue" type="xs:float" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PrintAlarmsInfoResponse">
+  <xs:element name="PrintAlarmInfoResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -100,7 +102,7 @@
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="ioAddress" type="xs:int" />
-        <xs:element minOccurs="0" name="scanTime" type="xs:float" />
+        <xs:element minOccurs="0" name="scanTime" type="xs:int" />
         <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
         <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="alarms" nillable="true" type="q3:ArrayOfAlarm" />
@@ -135,7 +137,7 @@
         <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="ioAddress" type="xs:int" />
-        <xs:element minOccurs="0" name="scanTime" type="xs:float" />
+        <xs:element minOccurs="0" name="scanTime" type="xs:int" />
         <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
         <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
         <xs:element minOccurs="0" name="lowLimit" type="xs:float" />
@@ -177,6 +179,78 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalInputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q5:DigitalInput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalInputTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalOutputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q6:DigitalOutput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalOutputTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogInputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q7:AnalogInput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogInputTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogOutputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q8:AnalogOutput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogOutputTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TrendingClientInit">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TrendingClientInitResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendNewValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tagName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tagType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" type="xs:float" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendNewValueResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

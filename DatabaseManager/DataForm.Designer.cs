@@ -277,6 +277,7 @@
             this.listBoxAlarms.Name = "listBoxAlarms";
             this.listBoxAlarms.Size = new System.Drawing.Size(303, 121);
             this.listBoxAlarms.TabIndex = 23;
+            this.listBoxAlarms.SelectedIndexChanged += new System.EventHandler(this.listBoxAlarms_SelectedIndexChanged);
             // 
             // btnAddAlarm
             // 
@@ -290,6 +291,7 @@
             // 
             // btnRemoveAlarm
             // 
+            this.btnRemoveAlarm.Enabled = false;
             this.btnRemoveAlarm.Location = new System.Drawing.Point(345, 367);
             this.btnRemoveAlarm.Name = "btnRemoveAlarm";
             this.btnRemoveAlarm.Size = new System.Drawing.Size(95, 23);
