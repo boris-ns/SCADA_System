@@ -20,8 +20,8 @@ namespace SCADA_Core
 
         public AnalogInput(string tagName, string description, string driver, int ioAddress,
                             int scanTime, bool enableScan, bool manualMode,
-                            float lowLimit, float highLimit, string units)
-            : base(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode)
+                            float lowLimit, float highLimit, string units, float manualValue)
+            : base(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, manualValue)
         {
             this.lowLimit = lowLimit;
             this.highLimit = highLimit;

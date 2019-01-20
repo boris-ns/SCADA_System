@@ -116,7 +116,8 @@ namespace DatabaseManager
             {
                 case 0: // Digital Input
                     service.AddDigitalInput(tagName, description, driver, ioAddress, int.Parse(textBoxScanTime.Text),
-                                            checkBoxOnOffScan.Checked, checkBoxAutoManual.Checked, alarms.ToArray());
+                                            checkBoxOnOffScan.Checked, checkBoxAutoManual.Checked, alarms.ToArray(),
+                                            float.Parse(textBoxManualModeValue.Text));
                     break;
 
                 case 1: // Digital Output
@@ -129,7 +130,8 @@ namespace DatabaseManager
                     highLimit = float.Parse(textBoxHighLimit.Text);
 
                     service.AddAnalogInput(tagName, description, driver, ioAddress, int.Parse(textBoxScanTime.Text), checkBoxOnOffScan.Checked,
-                                            checkBoxAutoManual.Checked, lowLimit, highLimit, textBoxUnits.Text, alarms.ToArray());
+                                            checkBoxAutoManual.Checked, lowLimit, highLimit, textBoxUnits.Text, alarms.ToArray(),
+                                            float.Parse(textBoxManualModeValue.Text));
                     break;
 
                 case 3: // Analog Output
@@ -291,6 +293,7 @@ namespace DatabaseManager
             textBoxUnits.Enabled = false;
             checkBoxOnOffScan.Enabled = true;
             checkBoxAutoManual.Enabled = true;
+            textBoxManualModeValue.Enabled = true;
         }
 
         private void EnableComponentsForDigitalOutput()
@@ -305,6 +308,7 @@ namespace DatabaseManager
             textBoxUnits.Enabled = false;
             checkBoxOnOffScan.Enabled = false;
             checkBoxAutoManual.Enabled = false;
+            textBoxManualModeValue.Enabled = false;
         }
 
         private void EnableComponentsForAnalogInput()
@@ -319,6 +323,7 @@ namespace DatabaseManager
             textBoxUnits.Enabled = true;
             checkBoxOnOffScan.Enabled = true;
             checkBoxAutoManual.Enabled = true;
+            textBoxManualModeValue.Enabled = true;
         }
 
         private void EnableComponentsForAnalogOutput()
@@ -333,6 +338,7 @@ namespace DatabaseManager
             textBoxUnits.Enabled = true;
             checkBoxOnOffScan.Enabled = false;
             checkBoxAutoManual.Enabled = false;
+            textBoxManualModeValue.Enabled = false;
         }
 
         private void comboBoxTagType_SelectedIndexChanged(object sender, EventArgs e)
@@ -373,11 +379,13 @@ namespace DatabaseManager
                 checkBoxAutoManual.Enabled = false;
                 textBoxInitValue.Enabled = false;
                 textBoxInitValue.Text = "0";
+                textBoxManualModeValue.Enabled = false;
             }
             else
             {
                 checkBoxAutoManual.Enabled = true;
                 textBoxInitValue.Enabled = true;
+                textBoxManualModeValue.Enabled = true;
             }
         }
     }

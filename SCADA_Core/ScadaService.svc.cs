@@ -18,16 +18,16 @@ namespace SCADA_Core
         private static Dictionary<string, string> publicKeysForRTUs = new Dictionary<string, string>();
         private static CspParameters csp = new CspParameters();
         private static RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
-
+        
+        // Drivers
+        public static SimulationDriver simulationDriver = new SimulationDriver();
+        public static RealTimeDriver realTimeDriver = new RealTimeDriver();
+        
         // Tags
         public static string fileLocationTags = "scadaConfig.xml";
         public static TagProcessing tagProcessing = new TagProcessing();
         public static ListOfTags tags = new ListOfTags("");
-
-        // Drivers
-        public static SimulationDriver simulationDriver = new SimulationDriver(1000);
-        public static RealTimeDriver realTimeDriver = new RealTimeDriver();
-
+        
         // Callbacks to clients
         public static IAlarmDisplayCallback alarmDisplayCallback = null;
         public static ITrendingCallback trendingCallback = null;
@@ -205,9 +205,9 @@ namespace SCADA_Core
         }
 
         public void AddDigitalInput(string tagName, string description, string driver, int ioAddress,
-                            int scanTime, bool enableScan, bool manualMode, Alarm[] alarms)
+                            int scanTime, bool enableScan, bool manualMode, Alarm[] alarms, float manualValue)
         {
-            DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode);
+            DigitalInput newTag = new DigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, manualValue);
             AddAlarmsToTag(newTag, alarms);
             //AddTagToDatabase(newTag);
             tags.DigitalInputs.Add(newTag);
@@ -225,10 +225,10 @@ namespace SCADA_Core
 
         public void AddAnalogInput(string tagName, string description, string driver, int ioAddress,
                                     int scanTime, bool enableScan, bool manualMode,
-                                    float lowLimit, float highLimit, string units, Alarm[] alarms)
+                                    float lowLimit, float highLimit, string units, Alarm[] alarms, float manualValue)
         {
             AnalogInput newTag = new AnalogInput(tagName, description, driver, ioAddress, scanTime, 
-                                                enableScan, manualMode, lowLimit, highLimit, units);
+                                                enableScan, manualMode, lowLimit, highLimit, units, manualValue);
             AddAlarmsToTag(newTag, alarms);
             //AddTagToDatabase(newTag);
             tags.AnalogInputs.Add(newTag);

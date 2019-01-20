@@ -106,6 +106,7 @@
         <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
         <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="alarms" nillable="true" type="q3:ArrayOfAlarm" />
+        <xs:element minOccurs="0" name="manualValue" type="xs:float" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -144,6 +145,7 @@
         <xs:element minOccurs="0" name="highLimit" type="xs:float" />
         <xs:element minOccurs="0" name="units" nillable="true" type="xs:string" />
         <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="alarms" nillable="true" type="q4:ArrayOfAlarm" />
+        <xs:element minOccurs="0" name="manualValue" type="xs:float" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -179,6 +181,54 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RemoveTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalInputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q5:DigitalInput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalInputTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalOutputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q6:DigitalOutput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditDigitalOutputTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogInputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q7:AnalogInput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogInputTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogOutputTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SCADA_Core" minOccurs="0" name="tag" nillable="true" type="q8:AnalogOutput" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditAnalogOutputTagResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

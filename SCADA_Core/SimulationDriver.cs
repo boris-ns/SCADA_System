@@ -10,36 +10,42 @@ namespace SCADA_Core
     {
         // key - ioAddress, value - value that SimDriver will write
         public Dictionary<int, float> ValuesOnAddresses { get; set; }
+        public Dictionary<int, bool> ValueOverriden { get; set; }
 
-        private const float amplitude = 100;
         private Thread thread;
+        private const float amplitude = 100;
 
-        public SimulationDriver(int milliseconds)
+        public SimulationDriver()
         {
             ValuesOnAddresses = new Dictionary<int, float>();
+            ValueOverriden = new Dictionary<int, bool>();
+
             ValuesOnAddresses[0] = 0.0f; // Sine
+            ValueOverriden[0] = false;
             ValuesOnAddresses[1] = 0.0f; // Cosine
+            ValueOverriden[1] = false;
             ValuesOnAddresses[2] = 0.0f; // Ramp
+            ValueOverriden[2] = false;
             ValuesOnAddresses[3] = 0.0f; // Triangle
+            ValueOverriden[3] = false;
             ValuesOnAddresses[4] = 0.0f; // Rectangle
+            ValueOverriden[4] = false;
 
             thread = new Thread(new ParameterizedThreadStart(StartSimulation));
-            thread.Start(milliseconds);
+            thread.Start(1000);
         }
 
         private void StartSimulation(object param)
         {
-            int milliseconds = (int)param;
-
             while (true)
             {
-                ValuesOnAddresses[0] = Sine();
-                ValuesOnAddresses[1] = Cosine();
-                ValuesOnAddresses[2] = Ramp();
-                ValuesOnAddresses[3] = Triangle();
-                ValuesOnAddresses[4] = Rectangle();
-
-                Thread.Sleep(milliseconds);
+                if (!ValueOverriden[0]) ValuesOnAddresses[0] = Sine();
+                if (!ValueOverriden[1]) ValuesOnAddresses[1] = Cosine();
+                if (!ValueOverriden[2]) ValuesOnAddresses[2] = Ramp();
+                if (!ValueOverriden[3]) ValuesOnAddresses[3] = Triangle();
+                if (!ValueOverriden[4]) ValuesOnAddresses[4] = Rectangle();
+                
+                Thread.Sleep(1000);
             }
         }
 
@@ -54,6 +60,12 @@ namespace SCADA_Core
                 return 0.0f;
 
             return ValuesOnAddresses[ioAddress];
+        }
+
+        public void WriteValue(int ioAddress, float newValue)
+        {
+            ValueOverriden[ioAddress] = true;
+            ValuesOnAddresses[ioAddress] = newValue;
         }
 
         private float Sine()

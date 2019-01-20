@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
@@ -14,6 +15,7 @@ namespace SCADA_Core
         [DataMember] private int scanTime;
         [DataMember] private bool enableScan;
         [DataMember] private bool manualMode;
+        [DataMember] private float manualValue;
 
         //public virtual ICollection<Alarm> Alarms { get; set; }
         [DataMember] private List<Alarm> alarms;
@@ -25,7 +27,7 @@ namespace SCADA_Core
         }
 
         public InputTag(string tagName, string description, string driver, int ioAddress,
-                        int scanTime, bool enableScan, bool manualMode)
+                        int scanTime, bool enableScan, bool manualMode, float manualValue)
             : base(tagName, description, driver, ioAddress)
         {
             //Alarms = new List<Alarm>();
@@ -33,6 +35,7 @@ namespace SCADA_Core
             this.scanTime = scanTime;
             this.enableScan = enableScan;
             this.manualMode = manualMode;
+            this.manualValue = manualValue;
         }
 
         public override string ToString()
@@ -63,6 +66,13 @@ namespace SCADA_Core
         {
             get { return alarms; }
             set { alarms = value; }
+        }
+
+        [NotMapped]
+        public float ManualValue
+        {
+            get { return manualValue; }
+            set { manualValue = value; }
         }
     }
 }

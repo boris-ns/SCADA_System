@@ -45,6 +45,7 @@
           <xs:element minOccurs="0" name="alarms" nillable="true" type="tns:ArrayOfAlarm" />
           <xs:element minOccurs="0" name="enableScan" type="xs:boolean" />
           <xs:element minOccurs="0" name="manualMode" type="xs:boolean" />
+          <xs:element minOccurs="0" name="manualValue" type="xs:float" />
           <xs:element minOccurs="0" name="scanTime" type="xs:int" />
         </xs:sequence>
       </xs:extension>

@@ -497,6 +497,9 @@ namespace TrendingComponent.ServiceReference {
         private bool manualModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float manualValueField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int scanTimeField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -534,6 +537,19 @@ namespace TrendingComponent.ServiceReference {
                 if ((this.manualModeField.Equals(value) != true)) {
                     this.manualModeField = value;
                     this.RaisePropertyChanged("manualMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float manualValue {
+            get {
+                return this.manualValueField;
+            }
+            set {
+                if ((this.manualValueField.Equals(value) != true)) {
+                    this.manualValueField = value;
+                    this.RaisePropertyChanged("manualValue");
                 }
             }
         }
@@ -707,10 +723,10 @@ namespace TrendingComponent.ServiceReference {
         System.Threading.Tasks.Task<TrendingComponent.ServiceReference.ListOfTags> GetTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms);
+        void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms);
+        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalOutputResponse")]
         void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue);
@@ -719,10 +735,10 @@ namespace TrendingComponent.ServiceReference {
         System.Threading.Tasks.Task AddDigitalOutputAsync(string tagName, string description, string driver, int ioAddress, float initValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms);
+        void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms);
+        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogOutputResponse")]
         void AddAnalogOutput(string tagName, string description, string driver, int ioAddress, float initValue, float lowLimit, float highLimit, string units);
@@ -735,6 +751,30 @@ namespace TrendingComponent.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/RemoveTag", ReplyAction="http://tempuri.org/IDatabaseManager/RemoveTagResponse")]
         System.Threading.Tasks.Task RemoveTagAsync(string tagName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalInputTagResponse")]
+        void EditDigitalInputTag(TrendingComponent.ServiceReference.DigitalInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalInputTagResponse")]
+        System.Threading.Tasks.Task EditDigitalInputTagAsync(TrendingComponent.ServiceReference.DigitalInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalOutputTagResponse")]
+        void EditDigitalOutputTag(TrendingComponent.ServiceReference.DigitalOutput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditDigitalOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditDigitalOutputTagResponse")]
+        System.Threading.Tasks.Task EditDigitalOutputTagAsync(TrendingComponent.ServiceReference.DigitalOutput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogInputTagResponse")]
+        void EditAnalogInputTag(TrendingComponent.ServiceReference.AnalogInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogInputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogInputTagResponse")]
+        System.Threading.Tasks.Task EditAnalogInputTagAsync(TrendingComponent.ServiceReference.AnalogInput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogOutputTagResponse")]
+        void EditAnalogOutputTag(TrendingComponent.ServiceReference.AnalogOutput tag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/EditAnalogOutputTag", ReplyAction="http://tempuri.org/IDatabaseManager/EditAnalogOutputTagResponse")]
+        System.Threading.Tasks.Task EditAnalogOutputTagAsync(TrendingComponent.ServiceReference.AnalogOutput tag);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -772,12 +812,12 @@ namespace TrendingComponent.ServiceReference {
             return base.Channel.GetTagsAsync();
         }
         
-        public void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms) {
-            base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
+        public void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue) {
+            base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms, manualValue);
         }
         
-        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms) {
-            return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
+        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue) {
+            return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms, manualValue);
         }
         
         public void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue) {
@@ -788,12 +828,12 @@ namespace TrendingComponent.ServiceReference {
             return base.Channel.AddDigitalOutputAsync(tagName, description, driver, ioAddress, initValue);
         }
         
-        public void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms) {
-            base.Channel.AddAnalogInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
+        public void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue) {
+            base.Channel.AddAnalogInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms, manualValue);
         }
         
-        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms) {
-            return base.Channel.AddAnalogInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
+        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, TrendingComponent.ServiceReference.Alarm[] alarms, float manualValue) {
+            return base.Channel.AddAnalogInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms, manualValue);
         }
         
         public void AddAnalogOutput(string tagName, string description, string driver, int ioAddress, float initValue, float lowLimit, float highLimit, string units) {
@@ -810,6 +850,38 @@ namespace TrendingComponent.ServiceReference {
         
         public System.Threading.Tasks.Task RemoveTagAsync(string tagName) {
             return base.Channel.RemoveTagAsync(tagName);
+        }
+        
+        public void EditDigitalInputTag(TrendingComponent.ServiceReference.DigitalInput tag) {
+            base.Channel.EditDigitalInputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditDigitalInputTagAsync(TrendingComponent.ServiceReference.DigitalInput tag) {
+            return base.Channel.EditDigitalInputTagAsync(tag);
+        }
+        
+        public void EditDigitalOutputTag(TrendingComponent.ServiceReference.DigitalOutput tag) {
+            base.Channel.EditDigitalOutputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditDigitalOutputTagAsync(TrendingComponent.ServiceReference.DigitalOutput tag) {
+            return base.Channel.EditDigitalOutputTagAsync(tag);
+        }
+        
+        public void EditAnalogInputTag(TrendingComponent.ServiceReference.AnalogInput tag) {
+            base.Channel.EditAnalogInputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditAnalogInputTagAsync(TrendingComponent.ServiceReference.AnalogInput tag) {
+            return base.Channel.EditAnalogInputTagAsync(tag);
+        }
+        
+        public void EditAnalogOutputTag(TrendingComponent.ServiceReference.AnalogOutput tag) {
+            base.Channel.EditAnalogOutputTag(tag);
+        }
+        
+        public System.Threading.Tasks.Task EditAnalogOutputTagAsync(TrendingComponent.ServiceReference.AnalogOutput tag) {
+            return base.Channel.EditAnalogOutputTagAsync(tag);
         }
     }
     

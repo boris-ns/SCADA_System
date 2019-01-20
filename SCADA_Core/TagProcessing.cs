@@ -54,8 +54,6 @@ namespace SCADA_Core
 
         private void ProcessDigitalInput(object tag)
         {
-            // @TODO dont forget on/off scan and auto/manual variables 
-
             DigitalInput diTag = (DigitalInput)tag;
 
             while (true)
@@ -65,6 +63,12 @@ namespace SCADA_Core
 
                 if (valueFromDriver <= 0) valueFromDriver = 0.0f;
                 else valueFromDriver = 1.0f;
+
+                if (diTag.ManualMode)
+                {
+                    valueFromDriver = diTag.ManualValue;
+                    ScadaService.simulationDriver.WriteValue(diTag.IOAddress, valueFromDriver);
+                }
 
                 if (diTag.EnableScan)
                 {
@@ -95,14 +99,16 @@ namespace SCADA_Core
         {
             // Digital output can be connected only to the simulation driver
             DigitalOutput doTag = (DigitalOutput)tag;
+            ScadaService.simulationDriver.WriteValue(doTag.IOAddress, doTag.InitValue);
 
+            if (ScadaService.trendingCallback != null)
+                ScadaService.trendingCallback.SendNewValue(doTag.TagName, "digital", doTag.InitValue);
 
+            WriteTagValueToDatabase(doTag.TagName, doTag.InitValue);
         }
 
         private void ProcessAnalogInput(object tag)
         {
-            // @TODO dont forget on/off scan and auto/manual variables 
-
             AnalogInput aiTag = (AnalogInput)tag;
 
             while (true)
@@ -114,6 +120,12 @@ namespace SCADA_Core
                     valueFromDriver = ScadaService.simulationDriver.ReadValue(aiTag.IOAddress);
                 else
                     valueFromDriver = ScadaService.realTimeDriver.ReadValue(aiTag.IOAddress);
+
+                if (aiTag.ManualMode && aiTag.Driver == "Simulation driver")
+                {
+                    valueFromDriver = aiTag.ManualValue;
+                    ScadaService.simulationDriver.WriteValue(aiTag.IOAddress, valueFromDriver);
+                }
 
                 if (aiTag.EnableScan)
                 {
@@ -139,10 +151,13 @@ namespace SCADA_Core
         private void ProcessAnalogOutput(object tag)
         {
             // Analog output can be only connected to the simulation driver
-
             AnalogOutput aoTag = (AnalogOutput)tag;
+            ScadaService.simulationDriver.WriteValue(aoTag.IOAddress, aoTag.InitValue);
 
+            if (ScadaService.trendingCallback != null)
+                ScadaService.trendingCallback.SendNewValue(aoTag.TagName, "analog", aoTag.InitValue);
 
+            WriteTagValueToDatabase(aoTag.TagName, aoTag.InitValue);
         }
     }
 }

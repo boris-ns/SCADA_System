@@ -65,6 +65,8 @@
             this.numericUpDownHighLimit = new System.Windows.Forms.NumericUpDown();
             this.labelAlarmName = new System.Windows.Forms.Label();
             this.textBoxAlarmName = new System.Windows.Forms.TextBox();
+            this.textBoxManualModeValue = new System.Windows.Forms.TextBox();
+            this.labelManualModeValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLowLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHighLimit)).BeginInit();
             this.SuspendLayout();
@@ -128,18 +130,18 @@
             this.labelOnOffScan.AutoSize = true;
             this.labelOnOffScan.Location = new System.Drawing.Point(12, 403);
             this.labelOnOffScan.Name = "labelOnOffScan";
-            this.labelOnOffScan.Size = new System.Drawing.Size(75, 13);
+            this.labelOnOffScan.Size = new System.Drawing.Size(71, 13);
             this.labelOnOffScan.TabIndex = 6;
-            this.labelOnOffScan.Text = "On / Off scan:";
+            this.labelOnOffScan.Text = "Enable Scan:";
             // 
             // labelAutoManual
             // 
             this.labelAutoManual.AutoSize = true;
             this.labelAutoManual.Location = new System.Drawing.Point(12, 439);
             this.labelAutoManual.Name = "labelAutoManual";
-            this.labelAutoManual.Size = new System.Drawing.Size(78, 13);
+            this.labelAutoManual.Size = new System.Drawing.Size(74, 13);
             this.labelAutoManual.TabIndex = 7;
-            this.labelAutoManual.Text = "Auto / Manual:";
+            this.labelAutoManual.Text = "Manual mode:";
             // 
             // labelLowLimit
             // 
@@ -303,7 +305,7 @@
             // 
             // buttonFinish
             // 
-            this.buttonFinish.Location = new System.Drawing.Point(274, 458);
+            this.buttonFinish.Location = new System.Drawing.Point(274, 462);
             this.buttonFinish.Name = "buttonFinish";
             this.buttonFinish.Size = new System.Drawing.Size(106, 23);
             this.buttonFinish.TabIndex = 26;
@@ -396,11 +398,29 @@
             this.textBoxAlarmName.Size = new System.Drawing.Size(121, 20);
             this.textBoxAlarmName.TabIndex = 36;
             // 
+            // textBoxManualModeValue
+            // 
+            this.textBoxManualModeValue.Location = new System.Drawing.Point(121, 462);
+            this.textBoxManualModeValue.Name = "textBoxManualModeValue";
+            this.textBoxManualModeValue.Size = new System.Drawing.Size(100, 20);
+            this.textBoxManualModeValue.TabIndex = 37;
+            // 
+            // labelManualModeValue
+            // 
+            this.labelManualModeValue.AutoSize = true;
+            this.labelManualModeValue.Location = new System.Drawing.Point(12, 465);
+            this.labelManualModeValue.Name = "labelManualModeValue";
+            this.labelManualModeValue.Size = new System.Drawing.Size(103, 13);
+            this.labelManualModeValue.TabIndex = 38;
+            this.labelManualModeValue.Text = "Manual mode value:";
+            // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 493);
+            this.Controls.Add(this.labelManualModeValue);
+            this.Controls.Add(this.textBoxManualModeValue);
             this.Controls.Add(this.textBoxAlarmName);
             this.Controls.Add(this.labelAlarmName);
             this.Controls.Add(this.numericUpDownHighLimit);
@@ -486,5 +506,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownHighLimit;
         private System.Windows.Forms.Label labelAlarmName;
         private System.Windows.Forms.TextBox textBoxAlarmName;
+        private System.Windows.Forms.TextBox textBoxManualModeValue;
+        private System.Windows.Forms.Label labelManualModeValue;
     }
 }

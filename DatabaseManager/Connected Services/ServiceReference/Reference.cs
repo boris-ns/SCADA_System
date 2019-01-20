@@ -497,6 +497,9 @@ namespace DatabaseManager.ServiceReference {
         private bool manualModeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float manualValueField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int scanTimeField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -534,6 +537,19 @@ namespace DatabaseManager.ServiceReference {
                 if ((this.manualModeField.Equals(value) != true)) {
                     this.manualModeField = value;
                     this.RaisePropertyChanged("manualMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float manualValue {
+            get {
+                return this.manualValueField;
+            }
+            set {
+                if ((this.manualValueField.Equals(value) != true)) {
+                    this.manualValueField = value;
+                    this.RaisePropertyChanged("manualValue");
                 }
             }
         }
@@ -707,10 +723,10 @@ namespace DatabaseManager.ServiceReference {
         System.Threading.Tasks.Task<DatabaseManager.ServiceReference.ListOfTags> GetTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms);
+        void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalInputResponse")]
-        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms);
+        System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddDigitalOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddDigitalOutputResponse")]
         void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue);
@@ -719,10 +735,10 @@ namespace DatabaseManager.ServiceReference {
         System.Threading.Tasks.Task AddDigitalOutputAsync(string tagName, string description, string driver, int ioAddress, float initValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms);
+        void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogInput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogInputResponse")]
-        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms);
+        System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDatabaseManager/AddAnalogOutput", ReplyAction="http://tempuri.org/IDatabaseManager/AddAnalogOutputResponse")]
         void AddAnalogOutput(string tagName, string description, string driver, int ioAddress, float initValue, float lowLimit, float highLimit, string units);
@@ -796,12 +812,12 @@ namespace DatabaseManager.ServiceReference {
             return base.Channel.GetTagsAsync();
         }
         
-        public void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms) {
-            base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
+        public void AddDigitalInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue) {
+            base.Channel.AddDigitalInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms, manualValue);
         }
         
-        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms) {
-            return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms);
+        public System.Threading.Tasks.Task AddDigitalInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue) {
+            return base.Channel.AddDigitalInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, alarms, manualValue);
         }
         
         public void AddDigitalOutput(string tagName, string description, string driver, int ioAddress, float initValue) {
@@ -812,12 +828,12 @@ namespace DatabaseManager.ServiceReference {
             return base.Channel.AddDigitalOutputAsync(tagName, description, driver, ioAddress, initValue);
         }
         
-        public void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms) {
-            base.Channel.AddAnalogInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
+        public void AddAnalogInput(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue) {
+            base.Channel.AddAnalogInput(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms, manualValue);
         }
         
-        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms) {
-            return base.Channel.AddAnalogInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms);
+        public System.Threading.Tasks.Task AddAnalogInputAsync(string tagName, string description, string driver, int ioAddress, int scanTime, bool enableScan, bool manualMode, float lowLimit, float highLimit, string units, DatabaseManager.ServiceReference.Alarm[] alarms, float manualValue) {
+            return base.Channel.AddAnalogInputAsync(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, lowLimit, highLimit, units, alarms, manualValue);
         }
         
         public void AddAnalogOutput(string tagName, string description, string driver, int ioAddress, float initValue, float lowLimit, float highLimit, string units) {

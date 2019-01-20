@@ -15,8 +15,8 @@ namespace SCADA_Core
         }
 
         public DigitalInput(string tagName, string description, string driver, int ioAddress,
-                            int scanTime, bool enableScan, bool manualMode)
-            : base(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode)
+                            int scanTime, bool enableScan, bool manualMode, float manualValue)
+            : base(tagName, description, driver, ioAddress, scanTime, enableScan, manualMode, manualValue)
         {
         }
 

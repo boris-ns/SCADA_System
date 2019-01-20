@@ -469,6 +469,30 @@
   <wsdl:message name="IDatabaseManager_RemoveTag_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveTagResponse" />
   </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditDigitalInputTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditDigitalInputTag" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditDigitalInputTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditDigitalInputTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditDigitalOutputTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditDigitalOutputTag" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditDigitalOutputTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditDigitalOutputTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditAnalogInputTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditAnalogInputTag" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditAnalogInputTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditAnalogInputTagResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditAnalogOutputTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditAnalogOutputTag" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseManager_EditAnalogOutputTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditAnalogOutputTagResponse" />
+  </wsdl:message>
   <wsdl:message name="ITrending_TrendingClientInit_InputMessage">
     <wsdl:part name="parameters" element="tns:TrendingClientInit" />
   </wsdl:message>
@@ -533,6 +557,22 @@
     <wsdl:operation name="RemoveTag">
       <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/RemoveTag" message="tns:IDatabaseManager_RemoveTag_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/RemoveTagResponse" message="tns:IDatabaseManager_RemoveTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditDigitalInputTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/EditDigitalInputTag" message="tns:IDatabaseManager_EditDigitalInputTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/EditDigitalInputTagResponse" message="tns:IDatabaseManager_EditDigitalInputTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditDigitalOutputTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/EditDigitalOutputTag" message="tns:IDatabaseManager_EditDigitalOutputTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/EditDigitalOutputTagResponse" message="tns:IDatabaseManager_EditDigitalOutputTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAnalogInputTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/EditAnalogInputTag" message="tns:IDatabaseManager_EditAnalogInputTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/EditAnalogInputTagResponse" message="tns:IDatabaseManager_EditAnalogInputTag_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAnalogOutputTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseManager/EditAnalogOutputTag" message="tns:IDatabaseManager_EditAnalogOutputTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseManager/EditAnalogOutputTagResponse" message="tns:IDatabaseManager_EditAnalogOutputTag_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ITrending">
@@ -659,6 +699,42 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveTag">
       <soap:operation soapAction="http://tempuri.org/IDatabaseManager/RemoveTag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditDigitalInputTag">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/EditDigitalInputTag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditDigitalOutputTag">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/EditDigitalOutputTag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAnalogInputTag">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/EditAnalogInputTag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAnalogOutputTag">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseManager/EditAnalogOutputTag" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
