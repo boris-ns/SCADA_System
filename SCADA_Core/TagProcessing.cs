@@ -134,7 +134,9 @@ namespace SCADA_Core
                         if (valueFromDriver < alarm.LowLimit || valueFromDriver > alarm.HighLimit)
                         {
                             alarm.AlarmDateTime = DateTime.Now;
-                            ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, aiTag.TagName, valueFromDriver);
+
+                            if (ScadaService.alarmDisplayCallback != null)
+                                ScadaService.alarmDisplayCallback.PrintAlarmInfo(alarm, aiTag.TagName, valueFromDriver);
                         }
                     }
 

@@ -380,6 +380,7 @@ namespace DatabaseManager
                 textBoxInitValue.Enabled = false;
                 textBoxInitValue.Text = "0";
                 textBoxManualModeValue.Enabled = false;
+                textBoxManualModeValue.Text = "0";
             }
             else
             {
